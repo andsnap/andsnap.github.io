@@ -1,5 +1,5 @@
 # Spandan Guragain's Sites
 
-scientiac.space
-map.scientiac.space
-pgp.scientiac.space
+(scientiac.space)[scientiac.space]  
+(map.scientiac.space)[map.scientiac.space]  
+(pgp.scientiac.space)[pgp.scientiac.space]  
