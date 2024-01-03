@@ -6,4 +6,4 @@
 
 ## Recent Blog Posts:
 
-[NixOS: A Purely Functional Linux Distribution](https://scientiac.space/blog/nixos-intro/)
+[Project Swarmanoid: Communication](https://scientiac.space/blog/esp-mosquitto/)
