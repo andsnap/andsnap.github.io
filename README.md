@@ -1,4 +1,4 @@
-# Spandan Guragain's Sites
+# Spandan's Sites
 
 [scientiac.space](https://scientiac.space)  
 [carboxi.de](https://carboxi.de)  
@@ -7,4 +7,4 @@
 
 ## Recent Blog Posts:
 
-[Project Swarmanoid: Communication](https://scientiac.space/blog/esp-mosquitto/)
+[Rhythms](https://scientiac.space/blog/rhythm/)
