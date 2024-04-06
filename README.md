@@ -7,4 +7,4 @@
 
 ## Recent Blog Posts:
 
-[Rhythms](https://scientiac.space/blog/rhythm/)
+[KDE Network Nepal: Event 0](https://scientiac.space/blog/kde-network-nepal/)
