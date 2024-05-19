@@ -1,4 +1,4 @@
-const emojis = ['ℼ','π','𝛑','𝜋','𝝅','𝝿'];
+const emojis = ['𝛑','⌬','𝕊'];
 const sizes = [8, 10, 12, 16, 20];
 
 function createEmoji(eventX, eventY) {
