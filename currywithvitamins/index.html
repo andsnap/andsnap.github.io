@@ -3,22 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SVG Viewer</title>
+  <title>CV</title>
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="container"></div>
+
   <script>
-    (function(){
+    (async function () {
       const container = document.getElementById('container');
       const MAX = 2;
+
       for (let i = 1; i <= MAX; i++) {
-        const obj = document.createElement('object');
-        obj.type = 'image/svg+xml';
-        obj.data = i + '.svg';
-        obj.className = 'page';
-        container.appendChild(obj);
+        const response = await fetch(`${i}.svg`);
+        const svgText = await response.text();
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'page';
+        wrapper.innerHTML = svgText;
+
+        container.appendChild(wrapper);
       }
     })();
   </script>
