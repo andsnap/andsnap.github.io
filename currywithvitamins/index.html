@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SVG Viewer</title>
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+    (function(){
+      const container = document.getElementById('container');
+      const MAX = 2;
+      for (let i = 1; i <= MAX; i++) {
+        const obj = document.createElement('object');
+        obj.type = 'image/svg+xml';
+        obj.data = i + '.svg';
+        obj.className = 'page';
+        container.appendChild(obj);
+      }
+    })();
+  </script>
+</body>
+</html>
