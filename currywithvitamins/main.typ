@@ -98,7 +98,7 @@ Internet Protocols, Robotics, Linux Development and Packaging, Declerative Packa
       tracking: -0.1pt,
     )[A Smart Waste Management Miniature Robot using Python and OpenCV #link("https://scientiac.space/blog/yantra-bot/")[#website-icon()]],
     c3: "Purwanchal Campus, Dharan, Nepal",
-    body: [Made A Smart Waste Management Miniature Robot using Python and OpenCV that can detect the nearest waste from an overhead camera, navigate to it using the shortest path on the map, pick it and reach the destination to dump it and again repeat the process if more waste is detected; with only sensor being an overhead camera tracking the ArUco Markers.],
+    body: [Made A Smart Waste Management Miniature Robot using Python and OpenCV that can detect the nearest waste, navigate to it using the shortest path on the map, pick it and reach the destination to dump it and again repeat the process if more waste is detected; with only sensor being an overhead camera tracking the ArUco Markers.],
   ),
 )
 
