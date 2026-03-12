@@ -59,7 +59,7 @@
       Bachelor in Computer Engineering, Ongoing \
 
       _Major Project:_ Implementing Read/Write Overlay Filesystem Support in a Microkernel Based Operating System \
-      _Supervisor:_ Er. Manoj Guragai
+      _Supervisor:_ Er. Manoj Kumar Guragai
 
       _Minor Project:_ A Federated Social Media for Scientific Communicators \
       _Supervisor:_ Er. Pukar Karki
