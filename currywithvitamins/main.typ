@@ -166,6 +166,6 @@ Internet Protocols, Robotics, Linux Development and Packaging, Declerative Packa
 #meta-entry-item-list(
   c2-text-args: (weight: "regular"),
   item-spacing: 0.8em,
-  (c2: [*Spoken Languages*], body: [English (_Academic_), Nepali (_Mother Tongue_), Hindi(_Conversational_)]),
+  (c2: [*Spoken Languages*], body: [English (_Academic_), Nepali (_Native_), Hindi(_Conversational_)]),
   (c2: [*Hobbies*], body: "Blogging, Poetry, Technical Writing"),
 )
