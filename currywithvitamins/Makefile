@@ -10,4 +10,4 @@ all: pages
 pages: $(patsubst %,main-%.svg,$(shell seq 1 2))
 
 main-%.svg: $(SRC)
-	$(TYPST) compile --format $(OUT_FMT) $< main-{p}.svg
+	$(TYPST) compile --format $(OUT_FMT) $< {p}.svg
