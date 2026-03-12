@@ -57,8 +57,12 @@
     c3: "IOE, Purwanchal Campus, Dharan, Nepal",
     body: [
       Bachelor in Computer Engineering, Ongoing \
+
       _Major Project:_ Implementing Read/Write Overlay Filesystem Support in a Microkernel Based Operating System \
       _Supervisor:_ Er. Manoj Guragai
+
+      _Minor Project:_ A Federated Social Media for Scientific Communicators \
+      _Supervisor:_ Er. Pukar Karki
     ],
   ),
   (
@@ -102,6 +106,17 @@ Internet Protocols, Robotics, Linux Development and Packaging, Declerative Packa
   ),
 )
 
+== Mini Projects
+
+#meta-entry-item-list(
+  c2-text-args: (weight: "regular"),
+  item-spacing: 0.8em,
+  (c1: [Flux #link("https://github.com/scientiac/flux")[#github-icon()]], c2: "Android GitHub client to update blog posts for static site generators using markdown."),
+  (c1: [Battery OSD #link("https://github.com/scientiac/battery-osd")[#github-icon()]], c2: "GTK Layer Shell app for battery monitoring for wayland window manager configurations."),
+  (c1: [Toss #link("https://github.com/scientiac/toss")[#github-icon()]], c2: "Simple socket based file moving and copying CLI tool that uses client/server logic."),
+  (c1: [Scifox #link("https://github.com/scientiac/scifox")[#github-icon()]], c2: "Minimal Firefox Userstyle that removes the notion that the site is being viewed on a browser."),
+)
+
 == Awards
 
 #meta-entry-item-list(
@@ -123,9 +138,9 @@ Internet Protocols, Robotics, Linux Development and Packaging, Declerative Packa
   ),
   (
     c1: "2023-07",
-    c2: text(tracking: -0.1pt)[Robotics Training Leader],
+    c2: text(tracking: -0.1pt)[Robotics Training and Mentoring],
     c3: "Robotics Club, Purwanchal Campus, Dharan, Nepal",
-    body: [Facilitated a week of robotics training, enhancing knowledge and skills among club members and fostering strong relationship on campus.],
+    body: [As an executive member of the Robotics Club, Facilitated multiple robotics trainings, enhancing knowledge and skills among club members and fostering strong relationship on campus.],
   ),
 )
 
