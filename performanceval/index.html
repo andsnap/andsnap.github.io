@@ -7,7 +7,8 @@
   <title>शिक्षकको कार्य सम्पादन मूल्याङ्कन फाराम</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@100..900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <!-- Load the official lite browser bundle from @myriaddreamin/typst.ts -->
   <script type="module"
@@ -36,9 +37,13 @@
         <fieldset>
           <legend>शिक्षक तह छनौट</legend>
           <p>
-            <label><input type="radio" name="teacher_level" value="नि.मा. तहका शिक्षकको लागि" checked> नि.मा. तहका शिक्षकको लागि</label>
+            <label><input type="radio" name="teacher_level" value="नि.मा. तहका शिक्षकको लागि" checked> नि.मा. तहका
+              शिक्षकको लागि</label>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <label><input type="radio" name="teacher_level" value="माध्यमिक तहका शिक्षकको लागि"> माध्यमिक तहका शिक्षकको लागि</label>
+            <label><input type="radio" name="teacher_level" value="माध्यमिक तहका शिक्षकको लागि"> माध्यमिक तहका शिक्षकको
+              लागि</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="teacher_level" value="none">लुकाउनुहोस्</label>
           </p>
         </fieldset>
 
@@ -119,24 +124,26 @@
             <label>(घ) आधार लिइएको परीक्षा :</label><br>
             <label><input type="checkbox" id="exam_1" name="exam_1"> (१) कक्षा ३ को उपलब्धि परीक्षा</label><br>
             <label><input type="checkbox" id="exam_2" name="exam_2"> (२) कक्षा ५ को उपलब्धि परीक्षा</label><br>
-            <label><input type="checkbox" id="exam_3" name="exam_3"> (३) कक्षा ८ को आधारभूत तह उत्तीर्ण परीक्षा</label><br>
+            <label><input type="checkbox" id="exam_3" name="exam_3"> (३) कक्षा ८ को आधारभूत तह उत्तीर्ण
+              परीक्षा</label><br>
             <label><input type="checkbox" id="exam_4" name="exam_4"> (४) कक्षा १० को माध्यमिक शिक्षा परीक्षा</label><br>
-            <label><input type="checkbox" id="exam_5" name="exam_5"> (५) कक्षा ११/१२ को माध्यमिक शिक्षा उत्तीर्ण परीक्षा</label><br>
+            <label><input type="checkbox" id="exam_5" name="exam_5"> (५) कक्षा ११/१२ को माध्यमिक शिक्षा उत्तीर्ण
+              परीक्षा</label><br>
             <label><input type="checkbox" id="exam_6" name="exam_6"> (६) अपाङ्गता भएका विद्यार्थीको परीक्षा</label><br>
             <label><input type="checkbox" id="exam_7" name="exam_7"> (७) अन्य</label>
           </p>
 
           <p>
             <label for="aushat_anka">(ङ) सम्बन्धित विषयको परीक्षामा विद्यार्थीहरूले प्राप्त गरेको औसत अङ्क :</label>
-            <input type="number" id="aushat_anka" name="aushat_anka" size="8" step="0.01" min="0" max="100">
+            <input type="text" id="aushat_anka" name="aushat_anka" size="8" placeholder="७५.५०">
           </p>
 
           <p>
-            (च) अध्यापन गरेको विषयको कक्षागत औसत उत्तीर्ण प्रतिशत / सम्बन्धित विषयको भौगोलिक एकाइको औसत उत्तीर्ण प्रतिशत × ३
+            (च) अध्यापन गरेको विषयको कक्षागत औसत उत्तीर्ण प्रतिशत / सम्बन्धित विषयको भौगोलिक एकाइको औसत उत्तीर्ण प्रतिशत
+            × ३
             =
             <label for="shikshak_prapta_anka_ka">शिक्षकले प्राप्त गरेको अङ्क :</label>
-            <input type="number" id="shikshak_prapta_anka_ka" name="shikshak_prapta_anka_ka" size="8" step="0.01" min="0"
-              max="3">
+            <input type="text" id="shikshak_prapta_anka_ka" name="shikshak_prapta_anka_ka" size="8" placeholder="३.००">
           </p>
 
           <p>
@@ -167,8 +174,7 @@
 
           <p>
             <label for="shikshak_prapta_anka_kha">(घ) शिक्षकले प्राप्त गरेको अङ्क :</label>
-            <input type="number" id="shikshak_prapta_anka_kha" name="shikshak_prapta_anka_kha" size="8" step="0.01" min="0"
-              max="1">
+            <input type="text" id="shikshak_prapta_anka_kha" name="shikshak_prapta_anka_kha" size="8" placeholder="१.००">
           </p>
         </fieldset>
 
@@ -187,64 +193,99 @@
             </thead>
             <tbody>
               <tr>
-                <td><label><input type="checkbox" id="resp_ka_check" name="resp_ka_check" onchange="toggleResp('ka')"> (क) प्रधानाध्यापक</label></td>
-                <td><input type="text" id="resp_ka_dekhi" name="resp_ka_dekhi" size="15" placeholder="००००-११-२२" disabled></td>
-                <td><input type="text" id="resp_ka_samma" name="resp_ka_samma" size="15" placeholder="००००-११-२२" disabled></td>
+                <td><label><input type="checkbox" id="resp_ka_check" name="resp_ka_check" onchange="toggleResp('ka')">
+                    (क) प्रधानाध्यापक</label></td>
+                <td><input type="text" id="resp_ka_dekhi" name="resp_ka_dekhi" size="15" placeholder="००००-११-२२"
+                    disabled></td>
+                <td><input type="text" id="resp_ka_samma" name="resp_ka_samma" size="15" placeholder="००००-११-२२"
+                    disabled></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_kha_check" name="resp_kha_check" onchange="toggleResp('kha')"> (ख) सहायक प्रधानाध्यापक</label></td>
-                <td><input type="text" id="resp_kha_dekhi" name="resp_kha_dekhi" size="15" placeholder="००००-११-२२" disabled></td>
-                <td><input type="text" id="resp_kha_samma" name="resp_kha_samma" size="15" placeholder="००००-११-२२" disabled></td>
+                <td><label><input type="checkbox" id="resp_kha_check" name="resp_kha_check"
+                      onchange="toggleResp('kha')"> (ख) सहायक प्रधानाध्यापक</label></td>
+                <td><input type="text" id="resp_kha_dekhi" name="resp_kha_dekhi" size="15" placeholder="००००-११-२२"
+                    disabled></td>
+                <td><input type="text" id="resp_kha_samma" name="resp_kha_samma" size="15" placeholder="००००-११-२२"
+                    disabled></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_ga_check" name="resp_ga_check" onchange="toggleResp('ga')"> (ग) विशेष शिक्षा शिक्षक</label></td>
-                <td><input type="text" id="resp_ga_dekhi" name="resp_ga_dekhi" size="15" placeholder="००००-११-२२" disabled></td>
-                <td><input type="text" id="resp_ga_samma" name="resp_ga_samma" size="15" placeholder="००००-११-२२" disabled></td>
+                <td><label><input type="checkbox" id="resp_ga_check" name="resp_ga_check" onchange="toggleResp('ga')">
+                    (ग) विशेष शिक्षा शिक्षक</label></td>
+                <td><input type="text" id="resp_ga_dekhi" name="resp_ga_dekhi" size="15" placeholder="००००-११-२२"
+                    disabled></td>
+                <td><input type="text" id="resp_ga_samma" name="resp_ga_samma" size="15" placeholder="००००-११-२२"
+                    disabled></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_gha_check" name="resp_gha_check" onchange="toggleResp('gha')"> (घ) वर्ग शिक्षक</label></td>
-                <td><input type="text" id="resp_gha_dekhi" name="resp_gha_dekhi" size="15" placeholder="००००-११-२२" disabled></td>
-                <td><input type="text" id="resp_gha_samma" name="resp_gha_samma" size="15" placeholder="००००-११-२२" disabled></td>
+                <td><label><input type="checkbox" id="resp_gha_check" name="resp_gha_check"
+                      onchange="toggleResp('gha')"> (घ) वर्ग शिक्षक</label></td>
+                <td><input type="text" id="resp_gha_dekhi" name="resp_gha_dekhi" size="15" placeholder="००००-११-२२"
+                    disabled></td>
+                <td><input type="text" id="resp_gha_samma" name="resp_gha_samma" size="15" placeholder="००००-११-२२"
+                    disabled></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_nga_check" name="resp_nga_check" onchange="toggleResp('nga')"> (ङ) बहुवर्ग शिक्षक</label></td>
-                <td><input type="text" id="resp_nga_dekhi" name="resp_nga_dekhi" size="15" placeholder="००००-११-२२" disabled></td>
-                <td><input type="text" id="resp_nga_samma" name="resp_nga_samma" size="15" placeholder="००००-११-२२" disabled></td>
+                <td><label><input type="checkbox" id="resp_nga_check" name="resp_nga_check"
+                      onchange="toggleResp('nga')"> (ङ) बहुवर्ग शिक्षक</label></td>
+                <td><input type="text" id="resp_nga_dekhi" name="resp_nga_dekhi" size="15" placeholder="००००-११-२२"
+                    disabled></td>
+                <td><input type="text" id="resp_nga_samma" name="resp_nga_samma" size="15" placeholder="००००-११-२२"
+                    disabled></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_cha_check" name="resp_cha_check" onchange="toggleResp('cha')"> (च) विद्यार्थी परामर्श तथा सल्लाह सेवा संयोजक</label></td>
-                <td><input type="text" id="resp_cha_dekhi" name="resp_cha_dekhi" size="15" placeholder="००००-११-२२" disabled></td>
-                <td><input type="text" id="resp_cha_samma" name="resp_cha_samma" size="15" placeholder="००००-११-२२" disabled></td>
+                <td><label><input type="checkbox" id="resp_cha_check" name="resp_cha_check"
+                      onchange="toggleResp('cha')"> (च) विद्यार्थी परामर्श तथा सल्लाह सेवा संयोजक</label></td>
+                <td><input type="text" id="resp_cha_dekhi" name="resp_cha_dekhi" size="15" placeholder="००००-११-२२"
+                    disabled></td>
+                <td><input type="text" id="resp_cha_samma" name="resp_cha_samma" size="15" placeholder="००००-११-२२"
+                    disabled></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_chha_check" name="resp_chha_check" onchange="toggleResp('chha')"> (छ) संगीत, गायन र नृत्य संयोजक</label></td>
-                <td><input type="text" id="resp_chha_dekhi" name="resp_chha_dekhi" size="15" placeholder="००००-११-२२" disabled></td>
-                <td><input type="text" id="resp_chha_samma" name="resp_chha_samma" size="15" placeholder="००००-११-२२" disabled></td>
+                <td><label><input type="checkbox" id="resp_chha_check" name="resp_chha_check"
+                      onchange="toggleResp('chha')"> (छ) संगीत, गायन र नृत्य संयोजक</label></td>
+                <td><input type="text" id="resp_chha_dekhi" name="resp_chha_dekhi" size="15" placeholder="००००-११-२२"
+                    disabled></td>
+                <td><input type="text" id="resp_chha_samma" name="resp_chha_samma" size="15" placeholder="००००-११-२२"
+                    disabled></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_ja_check" name="resp_ja_check" onchange="toggleResp('ja')"> (ज) खेलकुद संयोजक</label></td>
-                <td><input type="text" id="resp_ja_dekhi" name="resp_ja_dekhi" size="15" placeholder="००००-११-२२" disabled></td>
-                <td><input type="text" id="resp_ja_samma" name="resp_ja_samma" size="15" placeholder="००००-११-२२" disabled></td>
+                <td><label><input type="checkbox" id="resp_ja_check" name="resp_ja_check" onchange="toggleResp('ja')">
+                    (ज) खेलकुद संयोजक</label></td>
+                <td><input type="text" id="resp_ja_dekhi" name="resp_ja_dekhi" size="15" placeholder="००००-११-२२"
+                    disabled></td>
+                <td><input type="text" id="resp_ja_samma" name="resp_ja_samma" size="15" placeholder="००००-११-२२"
+                    disabled></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_jha_check" name="resp_jha_check" onchange="toggleResp('jha')"> (झ) अतिरिक्त क्रियाकलाप संयोजक</label></td>
-                <td><input type="text" id="resp_jha_dekhi" name="resp_jha_dekhi" size="15" placeholder="००००-११-२२" disabled></td>
-                <td><input type="text" id="resp_jha_samma" name="resp_jha_samma" size="15" placeholder="००००-११-२२" disabled></td>
+                <td><label><input type="checkbox" id="resp_jha_check" name="resp_jha_check"
+                      onchange="toggleResp('jha')"> (झ) अतिरिक्त क्रियाकलाप संयोजक</label></td>
+                <td><input type="text" id="resp_jha_dekhi" name="resp_jha_dekhi" size="15" placeholder="००००-११-२२"
+                    disabled></td>
+                <td><input type="text" id="resp_jha_samma" name="resp_jha_samma" size="15" placeholder="००००-११-२२"
+                    disabled></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_nya_check" name="resp_nya_check" onchange="toggleResp('nya')"> (ञ) परीक्षा र विद्यार्थी मूल्याङ्कन संयोजक</label></td>
-                <td><input type="text" id="resp_nya_dekhi" name="resp_nya_dekhi" size="15" placeholder="००००-११-२२" disabled></td>
-                <td><input type="text" id="resp_nya_samma" name="resp_nya_samma" size="15" placeholder="००००-११-२२" disabled></td>
+                <td><label><input type="checkbox" id="resp_nya_check" name="resp_nya_check"
+                      onchange="toggleResp('nya')"> (ञ) परीक्षा र विद्यार्थी मूल्याङ्कन संयोजक</label></td>
+                <td><input type="text" id="resp_nya_dekhi" name="resp_nya_dekhi" size="15" placeholder="००००-११-२२"
+                    disabled></td>
+                <td><input type="text" id="resp_nya_samma" name="resp_nya_samma" size="15" placeholder="००००-११-२२"
+                    disabled></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_ta_check" name="resp_ta_check" onchange="toggleResp('ta')"> (ट) विद्यालय समुदाय सम्बन्ध संयोजक</label></td>
-                <td><input type="text" id="resp_ta_dekhi" name="resp_ta_dekhi" size="15" placeholder="००००-११-२२" disabled></td>
-                <td><input type="text" id="resp_ta_samma" name="resp_ta_samma" size="15" placeholder="००००-११-२२" disabled></td>
+                <td><label><input type="checkbox" id="resp_ta_check" name="resp_ta_check" onchange="toggleResp('ta')">
+                    (ट) विद्यालय समुदाय सम्बन्ध संयोजक</label></td>
+                <td><input type="text" id="resp_ta_dekhi" name="resp_ta_dekhi" size="15" placeholder="००००-११-२२"
+                    disabled></td>
+                <td><input type="text" id="resp_ta_samma" name="resp_ta_samma" size="15" placeholder="००००-११-२२"
+                    disabled></td>
               </tr>
-              <tr>
-                <td><label><input type="checkbox" id="resp_tha_check" name="resp_tha_check" onchange="toggleResp('tha')"> (ठ) योग संयोजक</label></td>
-                <td><input type="text" id="resp_tha_dekhi" name="resp_tha_dekhi" size="15" placeholder="००००-११-२२" disabled></td>
-                <td><input type="text" id="resp_tha_samma" name="resp_tha_samma" size="15" placeholder="००००-११-२२" disabled></td>
+              <tr id="addOtherRow">
+                <td colspan="3" style="text-align: left; padding: 0.5rem 1rem;">
+                  <button type="button" id="addOtherBtn" onclick="addOtherResp()" class="btn-primary"
+                    style="width: auto; min-width: 120px; height: 28px; padding: 0 0.75rem; font-size: 0.75rem; border-radius: 2px;">अन्य
+                    थप्नुहोस्</button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -253,8 +294,7 @@
 
           <p>
             <label for="shikshak_prapta_anka_ga">शिक्षकले प्राप्त गरेको अङ्क :</label>
-            <input type="number" id="shikshak_prapta_anka_ga" name="shikshak_prapta_anka_ga" size="8" step="0.01" min="0"
-              max="1">
+            <input type="text" id="shikshak_prapta_anka_ga" name="shikshak_prapta_anka_ga" size="8" placeholder="१.००">
           </p>
         </fieldset>
 
@@ -410,6 +450,25 @@
           data[fields[i]] = "";
         }
       }
+
+      // Collect dynamically added "other" responsibilities
+      var otherResps = [];
+      var rows = document.querySelectorAll('.dynamic-resp-row');
+      rows.forEach(function (row) {
+        var title = row.querySelector('.dynamic-title');
+        var dekhi = row.querySelector('.dynamic-dekhi');
+        var samma = row.querySelector('.dynamic-samma');
+        if (title && title.value.trim()) {
+          otherResps.push({
+            check: true,
+            title: title.value.trim(),
+            dekhi: dekhi ? dekhi.value.trim() : "",
+            samma: samma ? samma.value.trim() : ""
+          });
+        }
+      });
+      data["other_resps"] = otherResps;
+
       return data;
     }
 
@@ -423,10 +482,45 @@
       }
     }
 
+    function addOtherResp() {
+      const addRow = document.getElementById('addOtherRow');
+      const newRow = document.createElement('tr');
+      newRow.className = 'dynamic-resp-row';
+      newRow.innerHTML = `
+        <td>
+          <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+            <button type="button" class="btn-delete" onclick="this.closest('tr').remove(); compilePreview();" style="margin: 0; flex-shrink: 0;">×</button>
+            <input type="text" class="dynamic-title" placeholder="जिम्मेवारी" oninput="compilePreview()" style="flex: 1; min-width: 120px; box-sizing: border-box;">
+          </div>
+        </td>
+        <td><input type="text" class="dynamic-dekhi" placeholder="००००-११-२२" oninput="compilePreview()" size="15" style="width: 100%; box-sizing: border-box;"></td>
+        <td><input type="text" class="dynamic-samma" placeholder="००००-११-२२" oninput="compilePreview()" size="15" style="width: 100%; box-sizing: border-box;"></td>
+      `;
+      addRow.parentNode.insertBefore(newRow, addRow);
+      compilePreview(); // Refresh preview automatically
+    }
+
+    function prepareTypstContent(data) {
+      const jsonStr = JSON.stringify(data);
+      const escapedJson = jsonStr
+        .replace(/\\/g, '\\\\')
+        .replace(/"/g, '\\"');
+
+      return mainTypContent
+        .replace(
+          '#let data = json("data.json")',
+          `#let data = json.decode("${escapedJson}")`
+        )
+        .replace(
+          '(check: data.at("resp_tha_check", default: false), title: "योग संयोजक", dekhi: data.at("resp_tha_dekhi", default: ""), samma: data.at("resp_tha_samma", default: "")),',
+          '..data.at("other_resps", default: ()).map(x => (check: x.at("check", default: false), title: x.at("title", default: ""), dekhi: x.at("dekhi", default: ""), samma: x.at("samma", default: ""))),'
+        );
+    }
+
     // Debouncer for live compiling to avoid performance lag
     function debounce(func, wait) {
       let timeout;
-      return function(...args) {
+      return function (...args) {
         clearTimeout(timeout);
         timeout = setTimeout(() => func.apply(this, args), wait);
       };
@@ -442,38 +536,27 @@
 
       try {
         const data = collectFormData();
-        const jsonStr = JSON.stringify(data);
-        
-        // Safely escape backslashes and double quotes for Typst string embedding
-        const escapedJson = jsonStr
-          .replace(/\\/g, '\\\\')
-          .replace(/"/g, '\\"');
-        
-        // Replace file json load with in-memory decoded json to bypass shadow file access bugs
-        const compiledContent = mainTypContent.replace(
-          '#let data = json("data.json")',
-          `#let data = json.decode("${escapedJson}")`
-        );
-        
+        const compiledContent = prepareTypstContent(data);
+
         // Compile directly using official mainContent parameter
         const svg = await $typst.svg({ mainContent: compiledContent });
-        
+
         const previewContainer = document.getElementById('previewContainer');
         previewContainer.innerHTML = svg;
-        
+
         const svgElem = previewContainer.firstElementChild;
         if (svgElem) {
           svgElem.removeAttribute('width');
           svgElem.removeAttribute('height');
           svgElem.style.width = '100%';
           svgElem.style.height = 'auto';
-          
+
           // Inject high-fidelity paper backgrounds and solid page separation lines
           const pages = svgElem.querySelectorAll('.typst-page');
           pages.forEach((page) => {
             const width = parseFloat(page.getAttribute('data-page-width')) || 596;
             const height = parseFloat(page.getAttribute('data-page-height')) || 842;
-            
+
             // White physical sheet rectangle background
             const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             rect.setAttribute('x', '0');
@@ -483,7 +566,7 @@
             rect.setAttribute('fill', '#ffffff');
             rect.setAttribute('stroke', '#cbd5e0');
             rect.setAttribute('stroke-width', '1.5');
-            
+
             // Inject as the first child so it sits beneath the text elements
             page.insertBefore(rect, page.firstChild);
           });
@@ -521,18 +604,7 @@
 
       try {
         const data = collectFormData();
-        const jsonStr = JSON.stringify(data);
-        
-        // Safely escape backslashes and double quotes for Typst string embedding
-        const escapedJson = jsonStr
-          .replace(/\\/g, '\\\\')
-          .replace(/"/g, '\\"');
-        
-        // Replace file json load with in-memory decoded json to bypass shadow file access bugs
-        const compiledContent = mainTypContent.replace(
-          '#let data = json("data.json")',
-          `#let data = json.decode("${escapedJson}")`
-        );
+        const compiledContent = prepareTypstContent(data);
 
         // Generate PDF client-side using official mainContent parameter
         const pdfData = await $typst.pdf({ mainContent: compiledContent });
@@ -588,7 +660,7 @@
         statusLabel.textContent = "Initializing...";
         statusLabel.className = "status-pill status-compiling";
       }
-      
+
       try {
         // Set up module URL paths for the official lite bundle
         $typst.setCompilerInitOptions({
@@ -602,7 +674,7 @@
 
         const res = await fetch('main.typ?t=' + Date.now());
         mainTypContent = await res.text();
-        
+
         // Preload local default fonts folder (Times New Roman fonts) and Noto Sans Devanagari CDN font
         const fontFiles = [
           'fonts/Times New Roman.ttf',
@@ -612,7 +684,7 @@
           'https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSerifDevanagari/hinted/ttf/NotoSerifDevanagari-Bold.ttf',
           'https://cdn.jsdelivr.net/gh/notofonts/notofonts.github.io/fonts/NotoSerifDevanagari/hinted/ttf/NotoSerifDevanagari-Medium.ttf'
         ];
-        
+
         const buffers = [];
         for (const file of fontFiles) {
           console.log("Preloading font:", file);
@@ -629,12 +701,12 @@
             console.warn("Error fetching font file:", file, fontErr);
           }
         }
-        
+
         if (buffers.length > 0) {
           console.log("Registering all fonts via single-call preloadFonts...");
           $typst.use(window.TypstSnippet.preloadFonts(buffers));
         }
-        
+
         // Perform initial compilation preview
         await compilePreview();
       } catch (err) {

@@ -317,6 +317,37 @@ th {
   opacity: 0.65;
 }
 
+.btn-delete {
+  background: transparent;
+  color: var(--status-error-text);
+  border: 1px solid var(--card-border);
+  border-radius: 2px;
+  font-family: var(--mono-font);
+  font-size: 0.8rem;
+  font-weight: 500;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  margin-right: 0.25rem;
+}
+
+.btn-delete:hover {
+  background: var(--status-error-text);
+  color: var(--bg-color);
+  border-color: var(--status-error-text);
+}
+
+table input[type="text"] {
+  margin-top: 0;
+  font-family: var(--mono-font);
+  font-size: 0.85rem;
+}
+
 input:disabled,
 textarea:disabled {
   background-color: var(--input-disabled-bg);

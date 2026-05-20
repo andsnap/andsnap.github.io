@@ -18,22 +18,24 @@
   stroke: 1pt + black,
 )
 
-#place(
-  top + right,
-  dx: 0.5cm,
-  dy: 0.25cm,
-)[
-  #rotate(-25deg)[
-    #box(
-      stroke: 0.5pt + rgb("000"),
-      radius: 4pt,
-      inset: (x: 5pt, y: 5pt),
-    )[
-      #set text(size: 8pt, weight: "bold")
-      #(data.at("teacher_level", default: "नि.मा. तहका शिक्षकको लागि"))
+#if data.at("teacher_level", default: "") != "" and data.at("teacher_level", default: "") != "none" {
+  place(
+    top + right,
+    dx: 0.5cm,
+    dy: 0.25cm,
+  )[
+    #rotate(-25deg)[
+      #box(
+        stroke: 0.5pt + rgb("000"),
+        radius: 4pt,
+        inset: (x: 5pt, y: 5pt),
+      )[
+        #set text(size: 8pt, weight: "bold")
+        #(data.teacher_level)
+      ]
     ]
   ]
-]
+}
 
 #align(center)[== अनुसूची १]
 #align(center)[== (नियम ३२ सँग सम्बन्धित)]
@@ -60,8 +62,6 @@
 
 हाल कार्यरत विद्यालयको नाम ठेगाना : #f(data.hal_vidyalaya)
 
-#linebreak()
-
 मूल्याङ्कन अवधि : #h(16pt) #f(data.mulyankan_dekhi) #h(16pt) देखि #h(16pt) #f(data.mulyankan_samma) #h(16pt) सम्म
 
 
@@ -81,7 +81,7 @@
 
 (घ) आधार लिइएको परीक्षा :
 
-#let cb(val) = box(stroke: 0.5pt, width: 10pt, height: 10pt, baseline: 2pt, inset: 0pt)[#align(center + horizon)[#set text(size: 8pt);#if val == true or val == "true" { "✓" }]]
+#let cb(val) = box(stroke: if val == true or val == "true" { 1.2pt } else { 0.5pt }, width: 10pt, height: 10pt, baseline: 2pt, inset: 0pt)[#align(center + horizon)[#set text(size: 8pt, weight: if val == true or val == "true" { "bold" } else { "regular" });#if val == true or val == "true" { "✓" }]]
 
 #grid(
   columns: (1fr, 1fr),
