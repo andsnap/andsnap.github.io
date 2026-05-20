@@ -37,13 +37,17 @@
         <fieldset>
           <legend>शिक्षक तह छनौट</legend>
           <p>
-            <label><input type="radio" name="teacher_level" value="नि.मा. तहका शिक्षकको लागि" checked> नि.मा. तहका
+            <label><input type="radio" name="teacher_level" value="निम्न माध्यमिक तहका शिक्षकको लागि" checked> निम्न
+              माध्यमिक तहका
               शिक्षकको लागि</label>
             &nbsp;&nbsp;&nbsp;&nbsp;
+            <br>
             <label><input type="radio" name="teacher_level" value="माध्यमिक तहका शिक्षकको लागि"> माध्यमिक तहका शिक्षकको
               लागि</label>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <label><input type="radio" name="teacher_level" value="none">लुकाउनुहोस्</label>
+            <br>
+            <label><input type="radio" name="teacher_level" value="प्राथमिक तहका शिक्षकको लागि"> प्राथमिक तहका शिक्षकको
+              लागि</label>
           </p>
         </fieldset>
 
@@ -67,7 +71,14 @@
           </p>
 
           <p>
-            <label for="shikshak_naam">शिक्षक / प्रधानाध्यापकको नाम, थर :</label><br>
+            <label>शिक्षक / प्रधानाध्यापकको पद छनौट :</label><br>
+            <label><input type="radio" name="shikshak_role" value="शिक्षक" checked> शिक्षक</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="shikshak_role" value="प्रधानाध्यापक"> प्रधानाध्यापक</label>
+          </p>
+
+          <p>
+            <label for="shikshak_naam">नाम, थर :</label><br>
             <input type="text" id="shikshak_naam" name="shikshak_naam" size="60">
           </p>
 
@@ -80,8 +91,12 @@
             <input type="text" id="tah" name="tah" size="15">
           </p>
           <p>
-            <label for="shreni">श्रेणी :</label>
-            <input type="text" id="shreni" name="shreni" size="15">
+            <label>श्रेणी :</label><br>
+            <label><input type="radio" name="shreni" value="प्रथम" checked> प्रथम</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="shreni" value="द्वितीय"> द्वितीय</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="shreni" value="तृतीय"> तृतीय</label>
           </p>
 
           <p>
@@ -122,15 +137,14 @@
 
           <p>
             <label>(घ) आधार लिइएको परीक्षा :</label><br>
-            <label><input type="checkbox" id="exam_1" name="exam_1"> (१) कक्षा ३ को उपलब्धि परीक्षा</label><br>
-            <label><input type="checkbox" id="exam_2" name="exam_2"> (२) कक्षा ५ को उपलब्धि परीक्षा</label><br>
-            <label><input type="checkbox" id="exam_3" name="exam_3"> (३) कक्षा ८ को आधारभूत तह उत्तीर्ण
-              परीक्षा</label><br>
-            <label><input type="checkbox" id="exam_4" name="exam_4"> (४) कक्षा १० को माध्यमिक शिक्षा परीक्षा</label><br>
-            <label><input type="checkbox" id="exam_5" name="exam_5"> (५) कक्षा ११/१२ को माध्यमिक शिक्षा उत्तीर्ण
-              परीक्षा</label><br>
-            <label><input type="checkbox" id="exam_6" name="exam_6"> (६) अपाङ्गता भएका विद्यार्थीको परीक्षा</label><br>
-            <label><input type="checkbox" id="exam_7" name="exam_7"> (७) अन्य</label>
+            <label><input type="radio" name="exam_type" value="exam_1" checked> (१) कक्षा ३ को उपलब्धि परीक्षा</label><br>
+            <label><input type="radio" name="exam_type" value="exam_2"> (२) कक्षा ५ को उपलब्धि परीक्षा</label><br>
+            <label><input type="radio" name="exam_type" value="exam_3"> (३) कक्षा ८ को आधारभूत तह उत्तीर्ण परीक्षा</label><br>
+            <label><input type="radio" name="exam_type" value="exam_4"> (४) कक्षा १० को माध्यमिक शिक्षा परीक्षा</label><br>
+            <label><input type="radio" name="exam_type" value="exam_5"> (५) कक्षा ११/१२ को माध्यमिक शिक्षा उत्तीर्ण परीक्षा</label><br>
+            <label><input type="radio" name="exam_type" value="exam_6"> (६) अपाङ्गता भएका विद्यार्थीको परीक्षा</label><br>
+            <label><input type="radio" name="exam_type" value="exam_7" id="exam_7_radio"> (७) अन्य</label>
+            <input type="text" id="exam_7_text" name="exam_7_text" placeholder="विवरण थप्नुहोस्" style="margin-left: 0.5rem; display: none;" oninput="compilePreview()">
           </p>
 
           <p>
@@ -203,92 +217,76 @@
             </thead>
             <tbody>
               <tr>
-                <td><label><input type="checkbox" id="resp_ka_check" name="resp_ka_check" onchange="toggleResp('ka')">
+                <td><label><input type="checkbox" id="resp_ka_check" name="resp_ka_check" onchange="toggleResp('ka')" checked>
                     (क) प्रधानाध्यापक</label></td>
-                <td><input type="text" id="resp_ka_dekhi" name="resp_ka_dekhi" size="15" placeholder="००००-११-२२"
-                    disabled></td>
-                <td><input type="text" id="resp_ka_samma" name="resp_ka_samma" size="15" placeholder="००००-११-२२"
-                    disabled></td>
+                <td><input type="text" id="resp_ka_dekhi" name="resp_ka_dekhi" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_ka_samma" name="resp_ka_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
                 <td><label><input type="checkbox" id="resp_kha_check" name="resp_kha_check"
-                      onchange="toggleResp('kha')"> (ख) सहायक प्रधानाध्यापक</label></td>
-                <td><input type="text" id="resp_kha_dekhi" name="resp_kha_dekhi" size="15" placeholder="००००-११-२२"
-                    disabled></td>
-                <td><input type="text" id="resp_kha_samma" name="resp_kha_samma" size="15" placeholder="००००-११-२२"
-                    disabled></td>
+                      onchange="toggleResp('kha')" checked> (ख) सहायक प्रधानाध्यापक</label></td>
+                <td><input type="text" id="resp_kha_dekhi" name="resp_kha_dekhi" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_kha_samma" name="resp_kha_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_ga_check" name="resp_ga_check" onchange="toggleResp('ga')">
+                <td><label><input type="checkbox" id="resp_ga_check" name="resp_ga_check" onchange="toggleResp('ga')" checked>
                     (ग) विशेष शिक्षा शिक्षक</label></td>
-                <td><input type="text" id="resp_ga_dekhi" name="resp_ga_dekhi" size="15" placeholder="००००-११-२२"
-                    disabled></td>
-                <td><input type="text" id="resp_ga_samma" name="resp_ga_samma" size="15" placeholder="००००-११-२२"
-                    disabled></td>
+                <td><input type="text" id="resp_ga_dekhi" name="resp_ga_dekhi" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_ga_samma" name="resp_ga_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
                 <td><label><input type="checkbox" id="resp_gha_check" name="resp_gha_check"
-                      onchange="toggleResp('gha')"> (घ) वर्ग शिक्षक</label></td>
-                <td><input type="text" id="resp_gha_dekhi" name="resp_gha_dekhi" size="15" placeholder="००००-११-२२"
-                    disabled></td>
-                <td><input type="text" id="resp_gha_samma" name="resp_gha_samma" size="15" placeholder="००००-११-२२"
-                    disabled></td>
+                      onchange="toggleResp('gha')" checked> (घ) वर्ग शिक्षक</label></td>
+                <td><input type="text" id="resp_gha_dekhi" name="resp_gha_dekhi" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_gha_samma" name="resp_gha_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
                 <td><label><input type="checkbox" id="resp_nga_check" name="resp_nga_check"
-                      onchange="toggleResp('nga')"> (ङ) बहुवर्ग शिक्षक</label></td>
-                <td><input type="text" id="resp_nga_dekhi" name="resp_nga_dekhi" size="15" placeholder="००००-११-२२"
-                    disabled></td>
-                <td><input type="text" id="resp_nga_samma" name="resp_nga_samma" size="15" placeholder="००००-११-२२"
-                    disabled></td>
+                      onchange="toggleResp('nga')" checked> (ङ) बहुवर्ग शिक्षक</label></td>
+                <td><input type="text" id="resp_nga_dekhi" name="resp_nga_dekhi" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_nga_samma" name="resp_nga_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
                 <td><label><input type="checkbox" id="resp_cha_check" name="resp_cha_check"
-                      onchange="toggleResp('cha')"> (च) विद्यार्थी परामर्श तथा सल्लाह सेवा संयोजक</label></td>
-                <td><input type="text" id="resp_cha_dekhi" name="resp_cha_dekhi" size="15" placeholder="००००-११-२२"
-                    disabled></td>
-                <td><input type="text" id="resp_cha_samma" name="resp_cha_samma" size="15" placeholder="००००-११-२२"
-                    disabled></td>
+                      onchange="toggleResp('cha')" checked> (च) विद्यार्थी परामर्श तथा सल्लाह सेवा संयोजक</label></td>
+                <td><input type="text" id="resp_cha_dekhi" name="resp_cha_dekhi" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_cha_samma" name="resp_cha_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
                 <td><label><input type="checkbox" id="resp_chha_check" name="resp_chha_check"
-                      onchange="toggleResp('chha')"> (छ) संगीत, गायन र नृत्य संयोजक</label></td>
-                <td><input type="text" id="resp_chha_dekhi" name="resp_chha_dekhi" size="15" placeholder="००००-११-२२"
-                    disabled></td>
-                <td><input type="text" id="resp_chha_samma" name="resp_chha_samma" size="15" placeholder="००००-११-२२"
-                    disabled></td>
+                      onchange="toggleResp('chha')" checked> (छ) संगीत, गायन र नृत्य संयोजक</label></td>
+                <td><input type="text" id="resp_chha_dekhi" name="resp_chha_dekhi" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_chha_samma" name="resp_chha_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_ja_check" name="resp_ja_check" onchange="toggleResp('ja')">
+                <td><label><input type="checkbox" id="resp_ja_check" name="resp_ja_check" onchange="toggleResp('ja')" checked>
                     (ज) खेलकुद संयोजक</label></td>
-                <td><input type="text" id="resp_ja_dekhi" name="resp_ja_dekhi" size="15" placeholder="००००-११-२२"
-                    disabled></td>
-                <td><input type="text" id="resp_ja_samma" name="resp_ja_samma" size="15" placeholder="००००-११-२२"
-                    disabled></td>
+                <td><input type="text" id="resp_ja_dekhi" name="resp_ja_dekhi" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_ja_samma" name="resp_ja_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
                 <td><label><input type="checkbox" id="resp_jha_check" name="resp_jha_check"
-                      onchange="toggleResp('jha')"> (झ) अतिरिक्त क्रियाकलाप संयोजक</label></td>
-                <td><input type="text" id="resp_jha_dekhi" name="resp_jha_dekhi" size="15" placeholder="००००-११-२२"
-                    disabled></td>
-                <td><input type="text" id="resp_jha_samma" name="resp_jha_samma" size="15" placeholder="००००-११-२२"
-                    disabled></td>
+                      onchange="toggleResp('jha')" checked> (झ) अतिरिक्त क्रियाकलाप संयोजक</label></td>
+                <td><input type="text" id="resp_jha_dekhi" name="resp_jha_dekhi" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_jha_samma" name="resp_jha_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
                 <td><label><input type="checkbox" id="resp_nya_check" name="resp_nya_check"
-                      onchange="toggleResp('nya')"> (ञ) परीक्षा र विद्यार्थी मूल्याङ्कन संयोजक</label></td>
-                <td><input type="text" id="resp_nya_dekhi" name="resp_nya_dekhi" size="15" placeholder="००००-११-२२"
-                    disabled></td>
-                <td><input type="text" id="resp_nya_samma" name="resp_nya_samma" size="15" placeholder="००००-११-२२"
-                    disabled></td>
+                      onchange="toggleResp('nya')" checked> (ञ) परीक्षा र विद्यार्थी मूल्याङ्कन संयोजक</label></td>
+                <td><input type="text" id="resp_nya_dekhi" name="resp_nya_dekhi" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_nya_samma" name="resp_nya_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_ta_check" name="resp_ta_check" onchange="toggleResp('ta')">
+                <td><label><input type="checkbox" id="resp_ta_check" name="resp_ta_check" onchange="toggleResp('ta')" checked>
                     (ट) विद्यालय समुदाय सम्बन्ध संयोजक</label></td>
-                <td><input type="text" id="resp_ta_dekhi" name="resp_ta_dekhi" size="15" placeholder="००००-११-२२"
-                    disabled></td>
-                <td><input type="text" id="resp_ta_samma" name="resp_ta_samma" size="15" placeholder="००००-११-२२"
-                    disabled></td>
+                <td><input type="text" id="resp_ta_dekhi" name="resp_ta_dekhi" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_ta_samma" name="resp_ta_samma" size="15" placeholder="००००-११-२२"></td>
+              </tr>
+              <tr>
+                <td><label><input type="checkbox" id="resp_tha_check" name="resp_tha_check" onchange="toggleResp('tha')" checked>
+                    (ठ) अन्य</label></td>
+                <td><input type="text" id="resp_tha_dekhi" name="resp_tha_dekhi" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_tha_samma" name="resp_tha_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr id="addOtherRow">
                 <td colspan="3" style="text-align: left; padding: 0.5rem 1rem;">
@@ -410,10 +408,9 @@
     // Form Fields Array
     var fields = [
       "vidyalaya", "darta_no", "darta_miti",
-      "shikshak_naam", "sanket_no", "tah", "shreni",
+      "shikshak_naam", "sanket_no", "tah",
       "hal_vidyalaya", "mulyankan_dekhi", "mulyankan_samma",
-      "adhyapan_tah", "adhyapan_kaksha", "adhyapan_bishay",
-      "exam_1", "exam_2", "exam_3", "exam_4", "exam_5", "exam_6", "exam_7",
+      "adhyapan_tah", "adhyapan_kaksha", "adhyapan_bishay", "exam_7_text",
       "aushat_anka", "class_pass_percent", "geo_pass_percent", "shikshak_prapta_anka_ka", "ka_dastakhat_miti",
       "anusandhan_bishay", "anusandhan_nishkarsha", "pratibedan_pristha",
       "shikshak_prapta_anka_kha",
@@ -444,6 +441,30 @@
       for (var i = 0; i < levelRadios.length; i++) {
         if (levelRadios[i].checked) {
           data["teacher_level"] = levelRadios[i].value;
+          break;
+        }
+      }
+
+      var roleRadios = document.getElementsByName("shikshak_role");
+      for (var i = 0; i < roleRadios.length; i++) {
+        if (roleRadios[i].checked) {
+          data["shikshak_role"] = roleRadios[i].value;
+          break;
+        }
+      }
+
+      var shreniRadios = document.getElementsByName("shreni");
+      for (var i = 0; i < shreniRadios.length; i++) {
+        if (shreniRadios[i].checked) {
+          data["shreni"] = shreniRadios[i].value;
+          break;
+        }
+      }
+
+      var examRadios = document.getElementsByName("exam_type");
+      for (var i = 0; i < examRadios.length; i++) {
+        if (examRadios[i].checked) {
+          data["exam_type"] = examRadios[i].value;
           break;
         }
       }
@@ -492,14 +513,34 @@
       }
     }
 
+    function removeDynamicRow(btn) {
+      btn.closest('tr').remove();
+      const rows = document.querySelectorAll('.dynamic-resp-row');
+      if (rows.length === 0) {
+        const thaCheck = document.getElementById('resp_tha_check');
+        if (thaCheck) {
+          thaCheck.disabled = false;
+        }
+      }
+      compilePreview();
+    }
+
     function addOtherResp() {
+      // Automatically disable/uncheck the static (ठ) अन्य option
+      const thaCheck = document.getElementById('resp_tha_check');
+      if (thaCheck) {
+        thaCheck.checked = false;
+        thaCheck.disabled = true;
+        toggleResp('tha');
+      }
+
       const addRow = document.getElementById('addOtherRow');
       const newRow = document.createElement('tr');
       newRow.className = 'dynamic-resp-row';
       newRow.innerHTML = `
         <td>
           <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
-            <button type="button" class="btn-delete" onclick="this.closest('tr').remove(); compilePreview();" style="margin: 0; flex-shrink: 0;">×</button>
+            <button type="button" class="btn-delete" onclick="removeDynamicRow(this)" style="margin: 0; flex-shrink: 0;">×</button>
             <input type="text" class="dynamic-title" placeholder="जिम्मेवारी" oninput="compilePreview()" style="flex: 1; min-width: 120px; box-sizing: border-box;">
           </div>
         </td>
@@ -516,15 +557,18 @@
         .replace(/\\/g, '\\\\')
         .replace(/"/g, '\\"');
 
-      return mainTypContent
-        .replace(
-          '#let data = json("data.json")',
-          `#let data = json.decode("${escapedJson}")`
-        )
-        .replace(
-          '(check: data.at("resp_tha_check", default: false), title: "योग संयोजक", dekhi: data.at("resp_tha_dekhi", default: ""), samma: data.at("resp_tha_samma", default: "")),',
-          '..data.at("other_resps", default: ()).map(x => (check: x.at("check", default: false), title: x.at("title", default: ""), dekhi: x.at("dekhi", default: ""), samma: x.at("samma", default: ""))),'
+      var content = mainTypContent.replace(
+        '#let data = json("data.json")',
+        `#let data = json.decode("${escapedJson}")`
+      );
+
+      if (data["other_resps"] && data["other_resps"].length > 0) {
+        content = content.replace(
+          '  (check: data.at("resp_tha_check", default: false), title: "अन्य :", dekhi: data.at("resp_tha_dekhi", default: ""), samma: data.at("resp_tha_samma", default: "")),',
+          '  ..data.at("other_resps", default: ()).map(x => (check: x.at("check", default: false), title: x.at("title", default: "") + " :", dekhi: x.at("dekhi", default: ""), samma: x.at("samma", default: ""))),'
         );
+      }
+      return content;
     }
 
     // Debouncer for live compiling to avoid performance lag
@@ -653,11 +697,55 @@
       }
     }
 
+    function updateTahFields(levelValue) {
+      const tahInput = document.getElementById("tah");
+      const adhyapanTahInput = document.getElementById("adhyapan_tah");
+      if (!tahInput || !adhyapanTahInput) return;
+
+      if (levelValue === "निम्न माध्यमिक तहका शिक्षकको लागि") {
+        tahInput.value = "निम्न माध्यमिक";
+        adhyapanTahInput.value = "निम्न माध्यमिक";
+      } else if (levelValue === "माध्यमिक तहका शिक्षकको लागि") {
+        tahInput.value = "माध्यमिक";
+        adhyapanTahInput.value = "माध्यमिक";
+      } else if (levelValue === "प्राथमिक तहका शिक्षकको लागि") {
+        tahInput.value = "प्राथमिक";
+        adhyapanTahInput.value = "प्राथमिक";
+      }
+    }
+
+    function toggleExamOtherField() {
+      const exam7Radio = document.getElementById("exam_7_radio");
+      const exam7Text = document.getElementById("exam_7_text");
+      if (exam7Radio && exam7Text) {
+        if (exam7Radio.checked) {
+          exam7Text.style.display = "inline-block";
+          exam7Text.focus();
+        } else {
+          exam7Text.style.display = "none";
+          exam7Text.value = "";
+        }
+      }
+    }
+
     // Set up form dynamic listener for live updates
     function initFormListeners() {
       const form = document.getElementById('mainForm');
       // Listen to input and change events with a 400ms debounce
       const debouncedPreview = debounce(compilePreview, 400);
+
+      // Handle level selection auto-fill
+      form.addEventListener('change', function (e) {
+        if (e.target && e.target.name === 'teacher_level') {
+          updateTahFields(e.target.value);
+          compilePreview(); // Refresh preview automatically
+        }
+        if (e.target && e.target.name === 'exam_type') {
+          toggleExamOtherField();
+          compilePreview(); // Refresh preview automatically
+        }
+      });
+
       form.addEventListener('input', debouncedPreview);
       form.addEventListener('change', debouncedPreview);
     }
@@ -731,6 +819,16 @@
     // Safe initialization to avoid race conditions
     function startApp() {
       console.log("Typst browser bundle loaded successfully. Starting application...");
+
+      // Auto-fill initial values based on the default checked radio button
+      const activeRadio = document.querySelector('input[name="teacher_level"]:checked');
+      if (activeRadio) {
+        updateTahFields(activeRadio.value);
+      }
+
+      // Initialize state of other exam text field
+      toggleExamOtherField();
+
       initTypst();
       initFormListeners();
     }
