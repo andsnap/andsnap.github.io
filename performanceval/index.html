@@ -335,16 +335,20 @@
 
     <!-- Right Column: Sticky Live WASM Preview -->
     <div class="preview-column">
+      <!-- Download action on top of the preview -->
+      <div class="bottom-actions">
+        <button type="button" id="compileBtn" class="btn-primary" onclick="compilePDF()">Compile & Download</button>
+        <div class="status-container">
+          <span id="statusLabel" class="status-pill status-ready">Ready</span>
+          <span id="statusMsg"></span>
+        </div>
+      </div>
+
       <!-- Real-time SVG Preview Card -->
       <div class="preview-pane">
         <div id="previewContainer">
           <p style="color: #64748b; padding: 2rem; text-align: center;">WASM Preview loading...</p>
         </div>
-      </div>
-
-      <!-- Download action under the preview -->
-      <div class="bottom-actions">
-        <button type="button" id="compileBtn" class="btn-primary" onclick="compilePDF()">Download</button>
       </div>
     </div>
 
@@ -505,7 +509,7 @@
       const statusLabel = document.getElementById("statusLabel");
 
       btn.disabled = true;
-      btn.textContent = "Downloading...";
+      btn.textContent = "Compiling...";
       if (statusLabel) {
         statusLabel.textContent = "Generating PDF...";
         statusLabel.className = "status-pill status-compiling";
@@ -563,7 +567,7 @@
         }
       } finally {
         btn.disabled = false;
-        btn.textContent = "Download";
+        btn.textContent = "Compile & Download";
       }
     }
 

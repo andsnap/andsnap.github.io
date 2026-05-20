@@ -119,7 +119,7 @@ body {
 .home-link {
   font-family: var(--mono-font);
   font-size: 1rem;
-  text-decoration: none;
+  text-decoration: underline;
   color: var(--link-color);
   transition: opacity 0.2s;
   display: inline-flex;
@@ -164,14 +164,17 @@ hr {
   height: max-content;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0;
+  /* Direct attachment for unified window */
 }
 
 .preview-pane {
   flex: 1;
-  background: none;
-  border: none;
-  border-radius: 0;
+  background: var(--bg-color);
+  border: 1px solid var(--card-border);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  /* Rounded bottom window edges */
   overflow: visible;
   display: block;
   padding: 0;
@@ -271,27 +274,35 @@ th {
 }
 
 .bottom-actions {
-  text-align: center;
-  margin-top: 1.5rem;
-  padding: 0;
-  background: none;
-  border: none;
-  box-shadow: none;
+  position: relative;
+  margin-top: 0;
+  width: 100%;
+  display: flex;
 }
 
 .btn-primary {
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  height: 34px;
+  /* Elegant titlebar height */
   background-color: var(--btn-primary-bg);
   color: var(--legend-text);
-  /* Always matches contrast */
-  border: 1px solid var(--input-border);
-  padding: 0.7rem 1.5rem;
-  border-radius: 2px;
+  border: 1px solid var(--card-border);
+  border-bottom: none;
+  /* Merges into the preview box cleanly */
+  border-radius: 4px 4px 0 0;
+  /* Rounded top corners like a window titlebar */
   cursor: pointer;
+  font-family: var(--mono-font);
   font-weight: 600;
-  font-size: 0.95rem;
-  transition: all 0.2s;
-  width: 100%;
-  max-width: 300px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+  text-decoration: underline;
 }
 
 .btn-primary:hover {
@@ -300,7 +311,10 @@ th {
 
 .btn-primary:disabled {
   background-color: var(--btn-primary-disabled);
+  color: var(--legend-text);
+  border-color: var(--card-border);
   cursor: not-allowed;
+  opacity: 0.65;
 }
 
 input:disabled,
@@ -312,37 +326,63 @@ textarea:disabled {
   box-shadow: none;
 }
 
+.status-container {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--mono-font);
+  font-size: 0.75rem;
+  pointer-events: none;
+  /* Let clicks pass through */
+}
+
 #statusMsg {
-  color: var(--status-ready-text);
-  font-weight: 600;
-  margin-top: 1rem;
-  text-align: center;
+  color: var(--legend-text);
+  /* Light text on dark titlebar background */
+  font-family: var(--mono-font);
+  font-size: 0.75rem;
+  margin: 0;
+  font-weight: normal;
 }
 
 /* Status Indicators */
 .status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  font-family: var(--mono-font);
   font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
+  font-weight: 500;
+  padding: 0;
+  border: none;
+  background: transparent;
+  text-transform: lowercase; /* Ultra-minimal clean lowercase state */
 }
 
 .status-ready {
-  background-color: var(--status-ready-bg);
-  color: var(--status-ready-text);
+  display: none !important; /* Hide "ready" state completely */
 }
 
 .status-compiling {
-  background-color: var(--status-compiling-bg);
-  color: var(--status-compiling-text);
+  color: #f59e0b; /* Minimal soft amber */
 }
 
 .status-error {
-  background-color: var(--status-error-bg);
-  color: var(--status-error-text);
+  color: #ef4444; /* Minimal soft red */
+}
+
+@media (prefers-color-scheme: dark) {
+  /* In dark mode, soft high-contrast dark tones for white titlebar background */
+  .status-compiling {
+    color: #d97706;
+  }
+
+  .status-error {
+    color: #dc2626;
+  }
 }
 
 /* Responsive Mobile Styles */
@@ -383,11 +423,15 @@ textarea:disabled {
   }
 
   .bottom-actions {
-    margin-top: 1rem;
+    margin-top: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
   }
 
   .btn-primary {
+    width: 100%;
     max-width: 100%;
-    /* Take full width on mobile for better tap target */
+    border-radius: 4px 4px 0 0;
   }
 }
