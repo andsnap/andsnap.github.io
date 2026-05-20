@@ -6,11 +6,19 @@
   }
 }
 
+#let f_percent(val) = {
+  if val != "" and val != none {
+    underline(stroke: (dash: "dotted"))[#val]
+  } else {
+    underline(stroke: (dash: "dotted"))[#h(15pt)]
+  }
+}
+
 #set underline(
   stroke: 1pt + black,
 )
 
-#set par(leading: 10pt, spacing: 10pt)
+#set par(leading: 9pt, spacing: 9pt)
 #set text(font: ("Times New Roman", "Noto Serif Devanagari"))
 #show math.equation: set text(font: ("Times New Roman", "Noto Serif Devanagari"))
 #set page(paper: "a4", margin: (x: 0.5in, y: 0.5in))
@@ -97,22 +105,28 @@
   ],
 )
 
-#stack(
-  dir: ltr,
-  spacing: 3pt,
-  [(ङ) सम्बन्धित विषयको परीक्षामा विद्यार्थीहरूले प्राप्त गरेको औसत अङ्क : ],
-  pad(top: -4pt)[
-    #box(
-      stroke: 0.5pt + rgb("000"),
-      inset: (x: 10pt, y: 5pt),
-    )[#(data.aushat_anka)]
-  ],
-)
+#block(breakable: false)[
+  #stack(
+    dir: ltr,
+    spacing: 3pt,
+    [(ङ) सम्बन्धित विषयको परीक्षामा विद्यार्थीहरूले प्राप्त गरेको औसत अङ्क : ],
+    pad(top: -4pt)[
+      #box(
+        stroke: 0.5pt + rgb("000"),
+        inset: (x: 10pt, y: 5pt),
+      )[#(data.aushat_anka)]
+    ],
+  )
+]
 
 #show math.equation.where(block: true): set align(left)
 $
 #[(च) ]
-#[अध्यापन गरेको विषयको कक्षागत औसत उत्तीर्ण प्रतिशत] / #[सम्बन्धित विषयको भौगोलिक एकाइको औसत उत्तीर्ण प्रतिशत]
+#(
+  [अध्यापन गरेको विषयको कक्षागत औसत उत्तीर्ण प्रतिशत : ] + f_percent(data.at("class_pass_percent", default: ""))
+) / #(
+  [सम्बन्धित विषयको भौगोलिक एकाइको औसत उत्तीर्ण प्रतिशत : ] + f_percent(data.at("geo_pass_percent", default: ""))
+)
 * ३ = #[*शिक्षकले प्राप्त गरेको अङ्क :*]
 
 #pad(top: 2pt)[
@@ -125,19 +139,12 @@ $
 
 आफूले अध्यापन गरेको विद्यार्थीले प्राप्त गरेको परीक्षाफल अनुसार गणना भएको छ भनी दस्तखत गर्ने सम्बन्धित शिक्षकको
 #grid(
-  columns: (2fr, 1fr, 1fr),
-  [],
+  columns: (1fr, 1fr, 1fr, 1fr),
   [],
   [दस्तखत :],
-)
-#grid(
-  columns: (2fr, 1fr, 1fr),
-  [],
-  [],
   [मिति : #f(data.ka_dastakhat_miti)],
+  [],
 )
-
-#linebreak()
 
 #align(center)[== खण्ड ख]
 #grid(
@@ -152,17 +159,19 @@ $
 #linebreak()
 (ग) संलग्न गरिएको प्रतिवेदनको पृष्ठ सङ्ख्या : #f(data.pratibedan_pristha)
 #linebreak()
-#stack(
-  dir: ltr,
-  spacing: 3pt,
-  [*(घ) शिक्षकले प्राप्त गरेको अङ्क :*],
-  pad(top: -4pt)[
-    #box(
-      stroke: 0.5pt + rgb("000"),
-      inset: (x: 10pt, y: 5pt),
-    )[#(data.shikshak_prapta_anka_kha)]
-  ],
-)
+#block(breakable: false)[
+  #stack(
+    dir: ltr,
+    spacing: 3pt,
+    [*(घ) शिक्षकले प्राप्त गरेको अङ्क :*],
+    pad(top: -4pt)[
+      #box(
+        stroke: 0.5pt + rgb("000"),
+        inset: (x: 10pt, y: 5pt),
+      )[#(data.shikshak_prapta_anka_kha)]
+    ],
+  )
+]
 
 #align(center)[== खण्ड ग]
 #v(10pt)
@@ -211,22 +220,24 @@ $
     ..active_resps.enumerate().map(pair => resp-row(labels.at(pair.at(0)), pair.at(1).title, pair.at(1).dekhi, pair.at(1).samma))
   )
 } else {
-  [कुनै विशेष जिम्मेवारी छैन]
+  [फारामबाट कुनै एक जिम्मेवारी छान्नुहोस्, नभए 'अन्य थप्नुहोस्' बटन थिची आफ्नो जिम्मेवारी लेख्नुहोस्]
 }
 
 #v(5pt)
 
-#stack(
-  dir: ltr,
-  spacing: 3pt,
-  [*शिक्षकले प्राप्त गरेको अङ्क :*],
-  pad(top: -4pt)[
-    #box(
-      stroke: 0.5pt + rgb("000"),
-      inset: (x: 10pt, y: 5pt),
-    )[#(data.shikshak_prapta_anka_ga)]
-  ],
-)
+#block(breakable: false)[
+  #stack(
+    dir: ltr,
+    spacing: 3pt,
+    [*शिक्षकले प्राप्त गरेको अङ्क :*],
+    pad(top: -5pt)[
+      #box(
+        stroke: 0.5pt + rgb("000"),
+        inset: (x: 10pt, y: 5pt),
+      )[#(data.shikshak_prapta_anka_ga)]
+    ],
+  )
+]
 
 #pagebreak()
 
@@ -239,16 +250,22 @@ $
     #underline[=== सिफारिस गर्ने]
     दस्तखत : \
     नाम थर : #f(data.sifaris_naam) \
-    पद : #f(data.sifaris_pad) \
-    सङ्केत नं. : #f(data.sifaris_sanket) \
+    #grid(
+      columns: (1.2fr, 1fr),
+      [सङ्केत नं. : #f(data.sifaris_sanket)],
+      [पद : #f(data.sifaris_pad)]
+    )
     मिति : #f(data.sifaris_miti)
   ],
   [
     #underline[=== प्रमाणित गर्ने]
     दस्तखत : \
     नाम थर : #f(data.pramanit_naam) \
-    पद : #f(data.pramanit_pad) \
-    सङ्केत नं. : #f(data.pramanit_sanket) \
+    #grid(
+      columns: (1.2fr, 1fr),
+      [सङ्केत नं. : #f(data.pramanit_sanket)],
+      [पद : #f(data.pramanit_pad)]
+    )
     मिति : #f(data.pramanit_miti)
   ]
 )
