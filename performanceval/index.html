@@ -5,6 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>शिक्षकको कार्य सम्पादन मूल्याङ्कन फाराम</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <!-- Load the official lite browser bundle from @myriaddreamin/typst.ts -->
   <script type="module"
@@ -13,6 +16,10 @@
 </head>
 
 <body>
+
+  <div class="home-link-container">
+    <a href="/" class="home-link">spandanguragain.com.np</a>
+  </div>
 
   <h2>अनुसूची १</h2>
   <h3>(नियम ३२ सँग सम्बन्धित)</h3>
@@ -505,7 +512,7 @@
       }
       if (statusMsg) {
         statusMsg.textContent = "Compiling PDF document in your browser...";
-        statusMsg.style.color = "#333";
+        statusMsg.style.color = "var(--text-color)";
       }
 
       try {
@@ -538,7 +545,7 @@
 
         if (statusMsg) {
           statusMsg.textContent = "PDF created and download started.";
-          statusMsg.style.color = "#38a169";
+          statusMsg.style.color = "var(--status-ready-text)";
         }
         if (statusLabel) {
           statusLabel.textContent = "Ready";
@@ -548,7 +555,7 @@
         console.error("PDF generation failed:", err);
         if (statusMsg) {
           statusMsg.textContent = "Error: " + err.message;
-          statusMsg.style.color = "#e53e3e";
+          statusMsg.style.color = "var(--status-error-text)";
         }
         if (statusLabel) {
           statusLabel.textContent = "Error";
