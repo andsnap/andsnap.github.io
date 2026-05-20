@@ -64,7 +64,6 @@
 
 मूल्याङ्कन अवधि : #h(16pt) #f(data.mulyankan_dekhi) #h(16pt) देखि #h(16pt) #f(data.mulyankan_samma) #h(16pt) सम्म
 
-
 #align(center)[== खण्ड क]
 #grid(
   columns: (1fr, 1fr),
@@ -133,6 +132,8 @@ $
   [दस्तखत :],
   [मिति : #f(data.ka_dastakhat_miti)],
 )
+
+#linebreak()
 
 #align(center)[== खण्ड ख]
 #grid(
