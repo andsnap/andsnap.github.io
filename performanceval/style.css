@@ -390,22 +390,27 @@ textarea:disabled {
   padding: 0;
   border: none;
   background: transparent;
-  text-transform: lowercase; /* Ultra-minimal clean lowercase state */
+  text-transform: lowercase;
+  /* Ultra-minimal clean lowercase state */
 }
 
 .status-ready {
-  display: none !important; /* Hide "ready" state completely */
+  display: none !important;
+  /* Hide "ready" state completely */
 }
 
 .status-compiling {
-  color: #f59e0b; /* Minimal soft amber */
+  color: #f59e0b;
+  /* Minimal soft amber */
 }
 
 .status-error {
-  color: #ef4444; /* Minimal soft red */
+  color: #ef4444;
+  /* Minimal soft red */
 }
 
 @media (prefers-color-scheme: dark) {
+
   /* In dark mode, soft high-contrast dark tones for white titlebar background */
   .status-compiling {
     color: #d97706;

@@ -174,7 +174,8 @@
 
           <p>
             <label for="shikshak_prapta_anka_kha">(घ) शिक्षकले प्राप्त गरेको अङ्क :</label>
-            <input type="text" id="shikshak_prapta_anka_kha" name="shikshak_prapta_anka_kha" size="8" placeholder="१.००">
+            <input type="text" id="shikshak_prapta_anka_kha" name="shikshak_prapta_anka_kha" size="8"
+              placeholder="१.००">
           </p>
         </fieldset>
 
@@ -620,7 +621,7 @@
         URL.revokeObjectURL(url);
 
         if (statusMsg) {
-          statusMsg.textContent = "PDF created and download started.";
+          statusMsg.textContent = "Success!";
           statusMsg.style.color = "var(--status-ready-text)";
         }
         if (statusLabel) {
