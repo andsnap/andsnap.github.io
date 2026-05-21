@@ -39,17 +39,7 @@
       </svg>
       Preview
     </button>
-    <button type="button" id="shareBtn" class="doc-action-btn" onclick="shareDocument()" style="display:none">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="18" cy="5" r="3" />
-        <circle cx="6" cy="12" r="3" />
-        <circle cx="18" cy="19" r="3" />
-        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-      </svg>
-      Share
-    </button>
+
     <button type="button" id="downloadBtn" class="doc-action-btn" onclick="compilePDF()">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
         stroke-linecap="round" stroke-linejoin="round">
@@ -507,40 +497,10 @@
       }
     }
 
-    // --- Share (only available via Web Share API) ---
-    async function shareDocument() {
-      if (!typstReady) return;
-      const btn = document.getElementById('shareBtn');
-      if (btn) btn.disabled = true;
-      showStatus('compiling', 'Generating PDF for sharing...');
-      try {
-        const data = collectFormData();
-        const compiledContent = prepareTypstContent(data);
-        const pdfData = await $typst.pdf({ mainContent: compiledContent });
-        const pdfBlob = new Blob([pdfData], { type: 'application/pdf' });
-        const file = new File([pdfBlob], 'evaluation_form.pdf', { type: 'application/pdf' });
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({ files: [file], title: 'कार्य सम्पादन मूल्याङ्कन फाराम' });
-        } else {
-          await navigator.share({ title: 'कार्य सम्पादन मूल्याङ्कन फाराम', url: window.location.href });
-        }
-        showStatus('success');
-      } catch (err) {
-        if (err.name !== 'AbortError') {
-          console.error('Share failed:', err);
-          showStatus('error', err.message);
-        } else {
-          showStatus('success');
-        }
-      } finally {
-        if (btn) btn.disabled = false;
-      }
-    }
 
-    // --- Init share visibility ---
+
+    // --- Init actions ---
     function initActions() {
-      const shareBtn = document.getElementById('shareBtn');
-      if (shareBtn) shareBtn.style.display = navigator.share ? '' : 'none';
       // Restore preview state or detect mobile default
       try {
         const v = localStorage.getItem('performanceval_preview');
