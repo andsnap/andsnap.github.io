@@ -106,6 +106,7 @@ body {
   max-width: 1600px;
   margin: 0 auto;
   padding: 2rem;
+  padding-bottom: 7rem;
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
@@ -150,13 +151,15 @@ hr {
   margin-top: 2rem;
 }
 
+
+
 /* Left Form Column */
 .form-column {
   flex: 1 1 45%;
   max-width: 900px;
 }
 
-/* Right Sticky Preview Column: Exactly 50% wide, sticky top, collapses to content height */
+/* Right Sticky Preview Column */
 .preview-column {
   flex: 1 1 50%;
   position: sticky;
@@ -165,16 +168,13 @@ hr {
   display: flex;
   flex-direction: column;
   gap: 0;
-  /* Direct attachment for unified window */
 }
 
 .preview-pane {
   flex: 1;
   background: var(--bg-color);
   border: 1px solid var(--card-border);
-  border-top: none;
-  border-radius: 0 0 4px 4px;
-  /* Rounded bottom window edges */
+  border-radius: 4px;
   overflow: visible;
   display: block;
   padding: 0;
@@ -273,36 +273,122 @@ th {
   color: var(--label-color);
 }
 
-.bottom-actions {
-  position: relative;
-  margin-top: 0;
-  width: 100%;
+/* Document Actions Dock */
+#docActions {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
   display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: var(--bg-color);
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+@media (prefers-color-scheme: dark) {
+  #docActions {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.doc-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--card-border);
+  border-radius: 2px;
+  padding: 0.4rem 1rem;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.doc-action-btn:hover {
+  background: var(--btn-primary-bg);
+  color: var(--legend-text);
+}
+
+.doc-action-btn.active {
+  background: var(--btn-primary-bg);
+  color: var(--legend-text);
+}
+
+.doc-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.doc-action-btn svg {
+  flex-shrink: 0;
+}
+
+/* Interactive Status Card inside Preview Container */
+.preview-status-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 480px;
+  padding: 2.5rem;
+  font-family: var(--mono-font);
+  color: var(--text-color);
+  background: var(--card-bg);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.preview-status-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-family: var(--mono-font);
+  text-transform: lowercase;
+}
+
+.preview-status-desc {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  max-width: 360px;
+  line-height: 1.5;
+}
+
+/* Error Card Specifics */
+.preview-status-card.error {
+  color: var(--status-error-text);
+  background-color: var(--status-error-bg);
+  border-radius: 4px;
+}
+
+/* Loading Card Specifics */
+.preview-status-card.loading {
+  color: var(--status-compiling-text);
+  background-color: var(--status-compiling-bg);
+  border-radius: 4px;
 }
 
 .btn-primary {
-  width: 100%;
-  max-width: 100%;
-  min-width: 100%;
-  height: 34px;
-  /* Elegant titlebar height */
   background-color: var(--btn-primary-bg);
   color: var(--legend-text);
   border: 1px solid var(--card-border);
-  border-bottom: none;
-  /* Merges into the preview box cleanly */
-  border-radius: 4px 4px 0 0;
-  /* Rounded top corners like a window titlebar */
+  border-radius: 2px;
   cursor: pointer;
-  font-family: var(--mono-font);
   font-weight: 600;
-  font-size: 0.85rem;
-  display: flex;
+  transition: all 0.2s ease;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
-  padding: 0;
-  text-decoration: underline;
 }
 
 .btn-primary:hover {
@@ -311,8 +397,6 @@ th {
 
 .btn-primary:disabled {
   background-color: var(--btn-primary-disabled);
-  color: var(--legend-text);
-  border-color: var(--card-border);
   cursor: not-allowed;
   opacity: 0.65;
 }
@@ -357,74 +441,10 @@ textarea:disabled {
   box-shadow: none;
 }
 
-.status-container {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--mono-font);
-  font-size: 0.75rem;
-  pointer-events: none;
-  /* Let clicks pass through */
-}
-
-#statusMsg {
-  color: var(--legend-text);
-  /* Light text on dark titlebar background */
-  font-family: var(--mono-font);
-  font-size: 0.75rem;
-  margin: 0;
-  font-weight: normal;
-}
-
-/* Status Indicators */
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--mono-font);
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 0;
-  border: none;
-  background: transparent;
-  text-transform: lowercase;
-  /* Ultra-minimal clean lowercase state */
-}
-
-.status-ready {
-  display: none !important;
-  /* Hide "ready" state completely */
-}
-
-.status-compiling {
-  color: #f59e0b;
-  /* Minimal soft amber */
-}
-
-.status-error {
-  color: #ef4444;
-  /* Minimal soft red */
-}
-
-@media (prefers-color-scheme: dark) {
-
-  /* In dark mode, soft high-contrast dark tones for white titlebar background */
-  .status-compiling {
-    color: #d97706;
-  }
-
-  .status-error {
-    color: #dc2626;
-  }
-}
-
-/* Responsive Mobile Styles */
 @media (max-width: 1024px) {
   body {
     padding: 1rem;
+    padding-bottom: 6rem;
   }
 
   h2 {
@@ -449,26 +469,12 @@ textarea:disabled {
 
   .preview-column {
     position: static;
-    /* Disable sticky positioning on smaller screens */
     height: auto;
   }
 
   fieldset {
     padding: 1rem 1.2rem;
     margin-bottom: 1.5rem;
-  }
-
-  .bottom-actions {
-    margin-top: 0;
-    flex-direction: row;
-    align-items: center;
-    gap: 0;
-  }
-
-  .btn-primary {
-    width: 100%;
-    max-width: 100%;
-    border-radius: 4px 4px 0 0;
   }
 }
 
@@ -479,12 +485,13 @@ textarea:disabled {
   }
 
   fieldset table thead {
-    display: none; /* Hide header on mobile since we layout cards */
+    display: none;
+    /* Hide header on mobile since we layout cards */
   }
 
-  fieldset table, 
-  fieldset table tbody, 
-  fieldset table tr, 
+  fieldset table,
+  fieldset table tbody,
+  fieldset table tr,
   fieldset table td {
     display: block;
     width: 100%;
@@ -544,5 +551,19 @@ textarea:disabled {
   #addOtherRow td button {
     width: 100% !important;
     height: 36px !important;
+  }
+
+  #docActions {
+    bottom: 1rem;
+    padding: 0.4rem 0.6rem;
+    gap: 0.5rem;
+    width: auto;
+    max-width: 90vw;
+  }
+
+  .doc-action-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+    gap: 0.3rem;
   }
 }

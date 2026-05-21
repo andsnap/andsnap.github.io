@@ -10,6 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@100..900&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
   <!-- Load the official lite browser bundle from @myriaddreamin/typst.ts -->
   <script type="module"
     src="https://cdn.jsdelivr.net/npm/@myriaddreamin/typst.ts/dist/esm/contrib/all-in-one-lite.bundle.js"
@@ -27,6 +29,37 @@
   <h2>शिक्षकको कार्य सम्पादन मूल्याङ्कन फाराम</h2>
 
   <hr>
+
+  <div id="docActions">
+    <button type="button" id="previewToggleBtn" class="doc-action-btn active" onclick="togglePreview()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+      Preview
+    </button>
+    <button type="button" id="shareBtn" class="doc-action-btn" onclick="shareDocument()" style="display:none">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="18" cy="5" r="3" />
+        <circle cx="6" cy="12" r="3" />
+        <circle cx="18" cy="19" r="3" />
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+      </svg>
+      Share
+    </button>
+    <button type="button" id="downloadBtn" class="doc-action-btn" onclick="compilePDF()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
+      </svg>
+      Download
+    </button>
+  </div>
 
   <main class="main-container">
 
@@ -137,14 +170,20 @@
 
           <p>
             <label>(घ) आधार लिइएको परीक्षा :</label><br>
-            <label><input type="radio" name="exam_type" value="exam_1" checked> (१) कक्षा ३ को उपलब्धि परीक्षा</label><br>
+            <label><input type="radio" name="exam_type" value="exam_1" checked> (१) कक्षा ३ को उपलब्धि
+              परीक्षा</label><br>
             <label><input type="radio" name="exam_type" value="exam_2"> (२) कक्षा ५ को उपलब्धि परीक्षा</label><br>
-            <label><input type="radio" name="exam_type" value="exam_3"> (३) कक्षा ८ को आधारभूत तह उत्तीर्ण परीक्षा</label><br>
-            <label><input type="radio" name="exam_type" value="exam_4"> (४) कक्षा १० को माध्यमिक शिक्षा परीक्षा</label><br>
-            <label><input type="radio" name="exam_type" value="exam_5"> (५) कक्षा ११/१२ को माध्यमिक शिक्षा उत्तीर्ण परीक्षा</label><br>
-            <label><input type="radio" name="exam_type" value="exam_6"> (६) अपाङ्गता भएका विद्यार्थीको परीक्षा</label><br>
+            <label><input type="radio" name="exam_type" value="exam_3"> (३) कक्षा ८ को आधारभूत तह उत्तीर्ण
+              परीक्षा</label><br>
+            <label><input type="radio" name="exam_type" value="exam_4"> (४) कक्षा १० को माध्यमिक शिक्षा
+              परीक्षा</label><br>
+            <label><input type="radio" name="exam_type" value="exam_5"> (५) कक्षा ११/१२ को माध्यमिक शिक्षा उत्तीर्ण
+              परीक्षा</label><br>
+            <label><input type="radio" name="exam_type" value="exam_6"> (६) अपाङ्गता भएका विद्यार्थीको
+              परीक्षा</label><br>
             <label><input type="radio" name="exam_type" value="exam_7" id="exam_7_radio"> (७) अन्य</label>
-            <input type="text" id="exam_7_text" name="exam_7_text" placeholder="विवरण थप्नुहोस्" style="margin-left: 0.5rem; display: none;" oninput="compilePreview()">
+            <input type="text" id="exam_7_text" name="exam_7_text" placeholder="विवरण थप्नुहोस्"
+              style="margin-left: 0.5rem; display: none;" oninput="compilePreview()">
           </p>
 
           <p>
@@ -217,76 +256,97 @@
             </thead>
             <tbody>
               <tr>
-                <td><label><input type="checkbox" id="resp_ka_check" name="resp_ka_check" onchange="toggleResp('ka')" checked>
+                <td><label><input type="checkbox" id="resp_ka_check" name="resp_ka_check" onchange="toggleResp('ka')"
+                      checked>
                     (क) प्रधानाध्यापक</label></td>
                 <td><input type="text" id="resp_ka_dekhi" name="resp_ka_dekhi" size="15" placeholder="००००-११-२२"></td>
                 <td><input type="text" id="resp_ka_samma" name="resp_ka_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_kha_check" name="resp_kha_check"
-                      onchange="toggleResp('kha')" checked> (ख) सहायक प्रधानाध्यापक</label></td>
-                <td><input type="text" id="resp_kha_dekhi" name="resp_kha_dekhi" size="15" placeholder="००००-११-२२"></td>
-                <td><input type="text" id="resp_kha_samma" name="resp_kha_samma" size="15" placeholder="००००-११-२२"></td>
+                <td><label><input type="checkbox" id="resp_kha_check" name="resp_kha_check" onchange="toggleResp('kha')"
+                      checked> (ख) सहायक प्रधानाध्यापक</label></td>
+                <td><input type="text" id="resp_kha_dekhi" name="resp_kha_dekhi" size="15" placeholder="००००-११-२२">
+                </td>
+                <td><input type="text" id="resp_kha_samma" name="resp_kha_samma" size="15" placeholder="००००-११-२२">
+                </td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_ga_check" name="resp_ga_check" onchange="toggleResp('ga')" checked>
+                <td><label><input type="checkbox" id="resp_ga_check" name="resp_ga_check" onchange="toggleResp('ga')"
+                      checked>
                     (ग) विशेष शिक्षा शिक्षक</label></td>
                 <td><input type="text" id="resp_ga_dekhi" name="resp_ga_dekhi" size="15" placeholder="००००-११-२२"></td>
                 <td><input type="text" id="resp_ga_samma" name="resp_ga_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_gha_check" name="resp_gha_check"
-                      onchange="toggleResp('gha')" checked> (घ) वर्ग शिक्षक</label></td>
-                <td><input type="text" id="resp_gha_dekhi" name="resp_gha_dekhi" size="15" placeholder="००००-११-२२"></td>
-                <td><input type="text" id="resp_gha_samma" name="resp_gha_samma" size="15" placeholder="००००-११-२२"></td>
+                <td><label><input type="checkbox" id="resp_gha_check" name="resp_gha_check" onchange="toggleResp('gha')"
+                      checked> (घ) वर्ग शिक्षक</label></td>
+                <td><input type="text" id="resp_gha_dekhi" name="resp_gha_dekhi" size="15" placeholder="००००-११-२२">
+                </td>
+                <td><input type="text" id="resp_gha_samma" name="resp_gha_samma" size="15" placeholder="००००-११-२२">
+                </td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_nga_check" name="resp_nga_check"
-                      onchange="toggleResp('nga')" checked> (ङ) बहुवर्ग शिक्षक</label></td>
-                <td><input type="text" id="resp_nga_dekhi" name="resp_nga_dekhi" size="15" placeholder="००००-११-२२"></td>
-                <td><input type="text" id="resp_nga_samma" name="resp_nga_samma" size="15" placeholder="००००-११-२२"></td>
+                <td><label><input type="checkbox" id="resp_nga_check" name="resp_nga_check" onchange="toggleResp('nga')"
+                      checked> (ङ) बहुवर्ग शिक्षक</label></td>
+                <td><input type="text" id="resp_nga_dekhi" name="resp_nga_dekhi" size="15" placeholder="००००-११-२२">
+                </td>
+                <td><input type="text" id="resp_nga_samma" name="resp_nga_samma" size="15" placeholder="००००-११-२२">
+                </td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_cha_check" name="resp_cha_check"
-                      onchange="toggleResp('cha')" checked> (च) विद्यार्थी परामर्श तथा सल्लाह सेवा संयोजक</label></td>
-                <td><input type="text" id="resp_cha_dekhi" name="resp_cha_dekhi" size="15" placeholder="००००-११-२२"></td>
-                <td><input type="text" id="resp_cha_samma" name="resp_cha_samma" size="15" placeholder="००००-११-२२"></td>
+                <td><label><input type="checkbox" id="resp_cha_check" name="resp_cha_check" onchange="toggleResp('cha')"
+                      checked> (च) विद्यार्थी परामर्श तथा सल्लाह सेवा संयोजक</label></td>
+                <td><input type="text" id="resp_cha_dekhi" name="resp_cha_dekhi" size="15" placeholder="००००-११-२२">
+                </td>
+                <td><input type="text" id="resp_cha_samma" name="resp_cha_samma" size="15" placeholder="००००-११-२२">
+                </td>
               </tr>
               <tr>
                 <td><label><input type="checkbox" id="resp_chha_check" name="resp_chha_check"
                       onchange="toggleResp('chha')" checked> (छ) संगीत, गायन र नृत्य संयोजक</label></td>
-                <td><input type="text" id="resp_chha_dekhi" name="resp_chha_dekhi" size="15" placeholder="००००-११-२२"></td>
-                <td><input type="text" id="resp_chha_samma" name="resp_chha_samma" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_chha_dekhi" name="resp_chha_dekhi" size="15" placeholder="००००-११-२२">
+                </td>
+                <td><input type="text" id="resp_chha_samma" name="resp_chha_samma" size="15" placeholder="००००-११-२२">
+                </td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_ja_check" name="resp_ja_check" onchange="toggleResp('ja')" checked>
+                <td><label><input type="checkbox" id="resp_ja_check" name="resp_ja_check" onchange="toggleResp('ja')"
+                      checked>
                     (ज) खेलकुद संयोजक</label></td>
                 <td><input type="text" id="resp_ja_dekhi" name="resp_ja_dekhi" size="15" placeholder="००००-११-२२"></td>
                 <td><input type="text" id="resp_ja_samma" name="resp_ja_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_jha_check" name="resp_jha_check"
-                      onchange="toggleResp('jha')" checked> (झ) अतिरिक्त क्रियाकलाप संयोजक</label></td>
-                <td><input type="text" id="resp_jha_dekhi" name="resp_jha_dekhi" size="15" placeholder="००००-११-२२"></td>
-                <td><input type="text" id="resp_jha_samma" name="resp_jha_samma" size="15" placeholder="००००-११-२२"></td>
+                <td><label><input type="checkbox" id="resp_jha_check" name="resp_jha_check" onchange="toggleResp('jha')"
+                      checked> (झ) अतिरिक्त क्रियाकलाप संयोजक</label></td>
+                <td><input type="text" id="resp_jha_dekhi" name="resp_jha_dekhi" size="15" placeholder="००००-११-२२">
+                </td>
+                <td><input type="text" id="resp_jha_samma" name="resp_jha_samma" size="15" placeholder="००००-११-२२">
+                </td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_nya_check" name="resp_nya_check"
-                      onchange="toggleResp('nya')" checked> (ञ) परीक्षा र विद्यार्थी मूल्याङ्कन संयोजक</label></td>
-                <td><input type="text" id="resp_nya_dekhi" name="resp_nya_dekhi" size="15" placeholder="००००-११-२२"></td>
-                <td><input type="text" id="resp_nya_samma" name="resp_nya_samma" size="15" placeholder="००००-११-२२"></td>
+                <td><label><input type="checkbox" id="resp_nya_check" name="resp_nya_check" onchange="toggleResp('nya')"
+                      checked> (ञ) परीक्षा र विद्यार्थी मूल्याङ्कन संयोजक</label></td>
+                <td><input type="text" id="resp_nya_dekhi" name="resp_nya_dekhi" size="15" placeholder="००००-११-२२">
+                </td>
+                <td><input type="text" id="resp_nya_samma" name="resp_nya_samma" size="15" placeholder="००००-११-२२">
+                </td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_ta_check" name="resp_ta_check" onchange="toggleResp('ta')" checked>
+                <td><label><input type="checkbox" id="resp_ta_check" name="resp_ta_check" onchange="toggleResp('ta')"
+                      checked>
                     (ट) विद्यालय समुदाय सम्बन्ध संयोजक</label></td>
                 <td><input type="text" id="resp_ta_dekhi" name="resp_ta_dekhi" size="15" placeholder="००००-११-२२"></td>
                 <td><input type="text" id="resp_ta_samma" name="resp_ta_samma" size="15" placeholder="००००-११-२२"></td>
               </tr>
               <tr>
-                <td><label><input type="checkbox" id="resp_tha_check" name="resp_tha_check" onchange="toggleResp('tha')" checked>
+                <td><label><input type="checkbox" id="resp_tha_check" name="resp_tha_check" onchange="toggleResp('tha')"
+                      checked>
                     (ठ) अन्य</label></td>
-                <td><input type="text" id="resp_tha_dekhi" name="resp_tha_dekhi" size="15" placeholder="००००-११-२२"></td>
-                <td><input type="text" id="resp_tha_samma" name="resp_tha_samma" size="15" placeholder="००००-११-२२"></td>
+                <td><input type="text" id="resp_tha_dekhi" name="resp_tha_dekhi" size="15" placeholder="००००-११-२२">
+                </td>
+                <td><input type="text" id="resp_tha_samma" name="resp_tha_samma" size="15" placeholder="००००-११-२२">
+                </td>
               </tr>
               <tr id="addOtherRow">
                 <td colspan="3" style="text-align: left; padding: 0.5rem 1rem;">
@@ -381,21 +441,11 @@
       </form>
     </div>
 
-    <!-- Right Column: Sticky Live WASM Preview -->
-    <div class="preview-column">
-      <!-- Download action on top of the preview -->
-      <div class="bottom-actions">
-        <button type="button" id="compileBtn" class="btn-primary" onclick="compilePDF()">Compile & Download</button>
-        <div class="status-container">
-          <span id="statusLabel" class="status-pill status-ready">Ready</span>
-          <span id="statusMsg"></span>
-        </div>
-      </div>
-
-      <!-- Real-time SVG Preview Card -->
+    <!-- Right Column: Sticky Live Document Preview -->
+    <div class="preview-column" id="previewColumn">
       <div class="preview-pane">
         <div id="previewContainer">
-          <p style="color: #64748b; padding: 2rem; text-align: center;">WASM Preview loading...</p>
+          <p style="color: #64748b; padding: 2rem; text-align: center;">document preview loading...</p>
         </div>
       </div>
     </div>
@@ -404,6 +454,109 @@
 
   <script>
     let mainTypContent = "";
+    let previewEnabled = true;
+    let typstReady = false;
+
+    // --- Status: displayed directly inside the WASM Preview Box ---
+    function showStatus(state, message) {
+      const container = document.getElementById('previewContainer');
+      if (!container) return;
+
+      // Handle disabled state
+      if (!previewEnabled) {
+        container.innerHTML = `
+          <div class="preview-status-card disabled">
+            <div class="preview-status-title">document preview is disabled</div>
+          </div>
+        `;
+        return;
+      }
+
+      if (state === 'compiling') {
+        container.innerHTML = `
+          <div class="preview-status-card loading">
+            <div class="preview-status-title">${message ? message.toLowerCase() : 'compiling...'}</div>
+          </div>
+        `;
+      } else if (state === 'error') {
+        container.innerHTML = `
+          <div class="preview-status-card error">
+            <div class="preview-status-title">compiling error</div>
+            <div class="preview-status-desc" style="white-space: pre-wrap; text-align: left; font-family: var(--mono-font); font-size: 0.8rem; margin-top: 1rem; width: 100%; border: 1px solid var(--status-error-text); padding: 0.75rem; border-radius: 2px; overflow-x: auto; max-height: 250px;">${message}</div>
+          </div>
+        `;
+      }
+    }
+
+    // --- Preview toggle ---
+    function togglePreview() {
+      previewEnabled = !previewEnabled;
+      try { localStorage.setItem('performanceval_preview', previewEnabled ? '1' : '0'); } catch (e) { }
+      applyPreviewState();
+    }
+    function applyPreviewState() {
+      const btn = document.getElementById('previewToggleBtn');
+      if (previewEnabled) {
+        if (btn) { btn.classList.add('active'); btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Preview'; }
+        if (typstReady) {
+          compilePreview();
+        }
+      } else {
+        if (btn) { btn.classList.remove('active'); btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg> Preview'; }
+        showStatus('success');
+      }
+    }
+
+    // --- Share (only available via Web Share API) ---
+    async function shareDocument() {
+      if (!typstReady) return;
+      const btn = document.getElementById('shareBtn');
+      if (btn) btn.disabled = true;
+      showStatus('compiling', 'Generating PDF for sharing...');
+      try {
+        const data = collectFormData();
+        const compiledContent = prepareTypstContent(data);
+        const pdfData = await $typst.pdf({ mainContent: compiledContent });
+        const pdfBlob = new Blob([pdfData], { type: 'application/pdf' });
+        const file = new File([pdfBlob], 'evaluation_form.pdf', { type: 'application/pdf' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: 'कार्य सम्पादन मूल्याङ्कन फाराम' });
+        } else {
+          await navigator.share({ title: 'कार्य सम्पादन मूल्याङ्कन फाराम', url: window.location.href });
+        }
+        showStatus('success');
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          console.error('Share failed:', err);
+          showStatus('error', err.message);
+        } else {
+          showStatus('success');
+        }
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    }
+
+    // --- Init share visibility ---
+    function initActions() {
+      const shareBtn = document.getElementById('shareBtn');
+      if (shareBtn) shareBtn.style.display = navigator.share ? '' : 'none';
+      // Restore preview state or detect mobile default
+      try {
+        const v = localStorage.getItem('performanceval_preview');
+        if (v !== null) {
+          previewEnabled = (v === '1');
+        } else {
+          // Detect smartphone (width <= 768px or standard mobile user agent match)
+          const isMobile = window.matchMedia("(max-width: 768px)").matches ||
+            /Android|iPhone|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+          previewEnabled = !isMobile;
+        }
+      } catch (e) {
+        previewEnabled = true; // Fallback
+      }
+      applyPreviewState();
+    }
 
     // Form Fields Array
     var fields = [
@@ -582,11 +735,11 @@
 
     // Live SVG preview renderer via WebAssembly
     async function compilePreview() {
-      const statusLabel = document.getElementById("statusLabel");
-      if (statusLabel) {
-        statusLabel.textContent = "Compiling...";
-        statusLabel.className = "status-pill status-compiling";
+      if (!previewEnabled || !typstReady) {
+        if (typstReady) showStatus('success'); // Clear active "Initializing..." status
+        return;
       }
+      showStatus('compiling', 'Compiling preview...');
 
       try {
         const data = collectFormData();
@@ -634,35 +787,19 @@
           });
         }
 
-        if (statusLabel) {
-          statusLabel.textContent = "Ready";
-          statusLabel.className = "status-pill status-ready";
-        }
+        showStatus('success');
       } catch (err) {
         console.error("Preview compilation failed:", err);
-        if (statusLabel) {
-          statusLabel.textContent = "Error";
-          statusLabel.className = "status-pill status-error";
-        }
+        showStatus('error', err.message);
       }
     }
 
     // Full PDF Export via WebAssembly
     async function compilePDF() {
-      const btn = document.getElementById("compileBtn");
-      const statusMsg = document.getElementById("statusMsg");
-      const statusLabel = document.getElementById("statusLabel");
-
+      if (!typstReady) return;
+      const btn = document.getElementById("downloadBtn");
       btn.disabled = true;
-      btn.textContent = "Compiling...";
-      if (statusLabel) {
-        statusLabel.textContent = "Generating PDF...";
-        statusLabel.className = "status-pill status-compiling";
-      }
-      if (statusMsg) {
-        statusMsg.textContent = "Compiling PDF document in your browser...";
-        statusMsg.style.color = "var(--text-color)";
-      }
+      showStatus('compiling', 'Generating PDF...');
 
       try {
         const data = collectFormData();
@@ -681,27 +818,12 @@
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
 
-        if (statusMsg) {
-          statusMsg.textContent = "Success!";
-          statusMsg.style.color = "var(--status-ready-text)";
-        }
-        if (statusLabel) {
-          statusLabel.textContent = "Ready";
-          statusLabel.className = "status-pill status-ready";
-        }
+        showStatus('success');
       } catch (err) {
         console.error("PDF generation failed:", err);
-        if (statusMsg) {
-          statusMsg.textContent = "Error: " + err.message;
-          statusMsg.style.color = "var(--status-error-text)";
-        }
-        if (statusLabel) {
-          statusLabel.textContent = "Error";
-          statusLabel.className = "status-pill status-error";
-        }
+        showStatus('error', err.message);
       } finally {
         btn.disabled = false;
-        btn.textContent = "Compile & Download";
       }
     }
 
@@ -760,12 +882,7 @@
 
     // Initialize Typst WASM, Fetch main.typ, and preload Times New Roman default fonts
     async function initTypst() {
-      const statusLabel = document.getElementById("statusLabel");
-      const statusMsg = document.getElementById("statusMsg");
-      if (statusLabel) {
-        statusLabel.textContent = "Initializing...";
-        statusLabel.className = "status-pill status-compiling";
-      }
+      showStatus('compiling', 'Initializing...');
 
       try {
         // Set up module URL paths for the official lite bundle
@@ -813,14 +930,13 @@
           $typst.use(window.TypstSnippet.preloadFonts(buffers));
         }
 
+        typstReady = true;
+
         // Perform initial compilation preview
         await compilePreview();
       } catch (err) {
         console.error("Failed to initialize WASM application:", err);
-        if (statusLabel) {
-          statusLabel.textContent = "Failed";
-          statusLabel.className = "status-pill status-error";
-        }
+        showStatus('error', 'Initialization failed: ' + err.message);
       }
     }
 
@@ -957,6 +1073,7 @@
         toggleExamOtherField();
       }
 
+      initActions();
       initTypst();
       initFormListeners();
     }
