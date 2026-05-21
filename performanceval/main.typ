@@ -270,8 +270,8 @@ $
     #underline[=== सिफारिस गर्ने]
     दस्तखत : \
     नाम थर : #f(data.sifaris_naam) \
-    सङ्केत नं. : #f(data.sifaris_sanket) \
     पद : #f(data.sifaris_pad) \
+    सङ्केत नं. : #f(data.sifaris_sanket) \
     मिति : #f(data.sifaris_miti) 
   ],
   [

@@ -590,6 +590,14 @@
 
       try {
         const data = collectFormData();
+
+        // Save form state to LocalStorage
+        try {
+          localStorage.setItem('performanceval_form_data', JSON.stringify(data));
+        } catch (storageErr) {
+          console.warn("Could not save form state to local storage:", storageErr);
+        }
+
         const compiledContent = prepareTypstContent(data);
 
         // Compile directly using official mainContent parameter
@@ -816,18 +824,138 @@
       }
     }
 
+    // Load cached form data from localStorage
+    function loadFormDataFromLocalStorage() {
+      try {
+        const storedStr = localStorage.getItem('performanceval_form_data');
+        if (!storedStr) return;
+
+        const data = JSON.parse(storedStr);
+        if (!data) return;
+
+        // 1. Restore standard teacher_level radio buttons
+        if (data["teacher_level"]) {
+          const levelRadios = document.getElementsByName("teacher_level");
+          for (let radio of levelRadios) {
+            if (radio.value === data["teacher_level"]) {
+              radio.checked = true;
+              break;
+            }
+          }
+        }
+
+        // 2. Restore shikshak_role radio buttons
+        if (data["shikshak_role"]) {
+          const roleRadios = document.getElementsByName("shikshak_role");
+          for (let radio of roleRadios) {
+            if (radio.value === data["shikshak_role"]) {
+              radio.checked = true;
+              break;
+            }
+          }
+        }
+
+        // 3. Restore shreni radio buttons
+        if (data["shreni"]) {
+          const shreniRadios = document.getElementsByName("shreni");
+          for (let radio of shreniRadios) {
+            if (radio.value === data["shreni"]) {
+              radio.checked = true;
+              break;
+            }
+          }
+        }
+
+        // 4. Restore exam_type radio buttons
+        if (data["exam_type"]) {
+          const examRadios = document.getElementsByName("exam_type");
+          for (let radio of examRadios) {
+            if (radio.value === data["exam_type"]) {
+              radio.checked = true;
+              break;
+            }
+          }
+        }
+
+        // 5. Restore standard fields (text fields, checkboxes, etc.)
+        for (let i = 0; i < fields.length; i++) {
+          const field = fields[i];
+          const el = document.getElementById(field);
+          if (el && data[field] !== undefined) {
+            if (el.type === 'checkbox') {
+              el.checked = data[field];
+            } else {
+              el.value = data[field];
+            }
+          }
+        }
+
+        // 6. Handle custom dynamic responsibility rows (other_resps)
+        const dynamicRows = document.querySelectorAll('.dynamic-resp-row');
+        dynamicRows.forEach(row => row.remove());
+
+        if (data["other_resps"] && data["other_resps"].length > 0) {
+          const addRow = document.getElementById('addOtherRow');
+          data["other_resps"].forEach(resp => {
+            const newRow = document.createElement('tr');
+            newRow.className = 'dynamic-resp-row';
+            newRow.innerHTML = `
+              <td>
+                <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                  <button type="button" class="btn-delete" onclick="removeDynamicRow(this)" style="margin: 0; flex-shrink: 0;">×</button>
+                  <input type="text" class="dynamic-title" placeholder="जिम्मेवारी" oninput="compilePreview()" value="${resp.title || ''}" style="flex: 1; min-width: 120px; box-sizing: border-box;">
+                </div>
+              </td>
+              <td><input type="text" class="dynamic-dekhi" placeholder="००००-११-२२" oninput="compilePreview()" value="${resp.dekhi || ''}" size="15" style="width: 100%; box-sizing: border-box;"></td>
+              <td><input type="text" class="dynamic-samma" placeholder="००००-११-२२" oninput="compilePreview()" value="${resp.samma || ''}" size="15" style="width: 100%; box-sizing: border-box;"></td>
+            `;
+            addRow.parentNode.insertBefore(newRow, addRow);
+          });
+        }
+
+        // 7. Update disabled/enabled input fields based on checkboxes state
+        const respKeys = ["ka", "kha", "ga", "gha", "nga", "cha", "chha", "ja", "jha", "nya", "ta", "tha"];
+        respKeys.forEach(key => {
+          const chk = document.getElementById('resp_' + key + '_check');
+          if (chk) {
+            if (data['resp_' + key + '_check'] !== undefined) {
+              chk.checked = data['resp_' + key + '_check'];
+            }
+            toggleResp(key);
+          }
+        });
+
+        // Disable static (ठ) अन्य if dynamic rows exist
+        const thaCheck = document.getElementById('resp_tha_check');
+        if (thaCheck) {
+          if (data["other_resps"] && data["other_resps"].length > 0) {
+            thaCheck.disabled = true;
+          }
+        }
+
+        // 8. Run dynamic togglers
+        toggleExamOtherField();
+
+      } catch (e) {
+        console.error("Error loading cached form data:", e);
+      }
+    }
+
     // Safe initialization to avoid race conditions
     function startApp() {
       console.log("Typst browser bundle loaded successfully. Starting application...");
 
-      // Auto-fill initial values based on the default checked radio button
-      const activeRadio = document.querySelector('input[name="teacher_level"]:checked');
-      if (activeRadio) {
-        updateTahFields(activeRadio.value);
-      }
+      // Load form data from LocalStorage
+      loadFormDataFromLocalStorage();
 
-      // Initialize state of other exam text field
-      toggleExamOtherField();
+      // If no local storage exists, set default levels
+      if (!localStorage.getItem('performanceval_form_data')) {
+        const activeRadio = document.querySelector('input[name="teacher_level"]:checked');
+        if (activeRadio) {
+          updateTahFields(activeRadio.value);
+        }
+        toggleExamOtherField();
+      }
 
       initTypst();
       initFormListeners();
